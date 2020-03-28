@@ -23,9 +23,11 @@
 #' 
 
 view_ui <- function(x, close_after = 5) {
+  # nocov start
   if (missing(x)) {
     x <- .Last.value
   }
+  # nocov end
   
   if (!class(x)[1] %in% c("shiny.tag", "shiny.tag.list")) {
     stop(
@@ -37,7 +39,7 @@ view_ui <- function(x, close_after = 5) {
   ui <- fluidPage(x)
   
   server <- function(input, output) {
-    if (!is.null(close_after)){
+    if (!is.null(close_after)) {
       Sys.sleep(close_after)
       stopApp()
     }
