@@ -1,0 +1,12 @@
+name: flexdashboard_demo
+title: flexdashboard_demo
+username:
+account: rjake
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1066392
+bundleId: 2288484
+url: https://rjake.shinyapps.io/flexdashboard_demo/
+when: 1564853424.07289
+asMultiple: FALSE
+asStatic: FALSE

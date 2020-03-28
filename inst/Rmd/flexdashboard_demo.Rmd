@@ -1,0 +1,164 @@
+---
+title: "Flexdashboard Demo"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    source_code: embed
+    theme: lumen
+    vertical_layout: fill
+runtime: shiny
+---
+
+```{r input_demo, eval = FALSE}
+input <- list(
+  displ = c(4.2, 4.6),
+  year = 2008
+)
+```
+
+
+```{r setup}
+library(tidyverse)
+#library(shiny)        #renderPlot, renderTable, sliderInput
+library(shinyWidgets) #radioGroupButtons
+
+raw_data <- mpg 
+```
+
+MPG Example
+=====================================
+Column {.sidebar data-width=200} 
+-------------------------------------
+
+Filter the data:
+
+```{r filters}
+#You can make this sidebar global by putting it ahead of Tab 1
+
+#below are 2 input options: a gorup of buttons, and a slider
+radioGroupButtons( # for categorical variables
+  inputId = "year", # this will allow the selection to be referenced as input$cyl
+  label = "Select Year of Vehicle", # NULL if you don't want a header
+  choiceNames = c("All", sort(unique(raw_data$year))), # can use paste, etc to make nicer display
+  choiceValues = c("All", sort(unique(raw_data$year))), # values in the data, need to line up with above
+  justified = T, # will fill the width of the container it sits in (sidebar)
+  status = "primary"
+)
+
+sliderInput(
+  inputId = "displ", # referenced as input$displ
+  label = "Select Engine Displacement:",
+  value = range(raw_data$displ), # default selection, you can move the range around
+  min = (min(raw_data$displ)),
+  max = (max(raw_data$displ)),
+  step = .1
+)
+
+# This will build a dataframe to use throughout the dashboard. To reference this dataframe, you will need to be in some reactive element ex: renderText({nrow(use_data())}). This is essentially a function and so you will need to use parentheses at the end like this: use_data() 
+use_data <- reactive({
+  df <-
+    raw_data %>%
+    filter(between(displ, min(input$displ), max(input$displ)))
+
+  # this if statements will filter for the selection of the radioGroupButtons
+  if (input$year != "All") {
+    df <- df %>% filter(year == input$year)
+  }
+
+  df
+})
+```
+
+
+Column {data-width=450}
+-----------------------------------------------------------------------
+
+### Highway MPG by Engine Displacement
+```{r mpg_plot}
+renderPlot({ # renderPlot is only required becuase we are referencing someting reactive: use_data(). Otherwise we could just use ggplot(raw_data,...)
+  ggplot(use_data(), aes(displ, hwy)) +
+    geom_smooth(color = "grey65") +
+    geom_point(aes(color = factor(cyl))) +
+    ylim(0, 45) +
+    labs(color = "Cylinder") +
+    theme(legend.position = "bottom")
+})
+```
+
+Column
+-----------------------------------------------------------------------
+
+### Top 10 by hwy
+
+```{r top_10, fig.height = 5.5}
+#this will display a top 10 table that is filtered based on the selections above
+renderTable(
+  expr = {# use {...} section to create table
+    use_data() %>%
+    arrange(desc(hwy)) %>% 
+    slice(1:10) %>% 
+    mutate(Rank = row_number()) %>% 
+    select(Rank, year, manufacturer, model, trans, hwy, fl, class)
+  }, 
+  # additional arguments for renderTable
+  spacing = "xs",
+  align = "l",
+  bordered = T
+)
+```
+
+### `r renderText({paste("Max Highway MPG by Class in Year:", input$year)})`
+```{r by_class, fig.height = 4.5}
+renderTable({ # you can make separate objects (similar to in a function)
+    count_n <-
+      use_data() %>%
+      count(class)
+  
+    max_value <- # this could have been done above, but I broke into different steps to show how it works
+      use_data() %>%
+      group_by(class) %>%
+      summarise(hwy = max(hwy)) %>%
+      ungroup()
+  
+    # and then add them together for the final product
+    count_n %>%
+      left_join(max_value) %>%
+      arrange(desc(hwy)) %>%
+      select(hwy, class, `#` = n)
+  },
+  spacing = "xs",
+  align = "l",
+  bordered = T
+)
+```
+
+Blank Page
+=====================================
+Column 
+-------------------------------------
+### Box 1
+
+* Find more information about flexdashboards here:
+    https://rmarkdown.rstudio.com/flexdashboard/using.html#overview
+
+* The `shinyWidgets` gallery has some nice widgets for filtering:
+    https://dreamrs-vic.shinyapps.io/shinyWidgets/
+    The gallery isn't always available. Another overview can be found here:      
+    https://dreamrs.github.io/shinyWidgets/index.html
+
+```{r box_1}
+
+```
+   
+Column {.tabset}
+-------------------------------------
+   
+### Tab 1
+```{r tab_1}
+
+```   
+ 
+### Tab 2
+```{r tab_2}
+
+```
