@@ -16,10 +16,10 @@ reactive data frames into functions that will read from your raw data
 and become available in your global environment. The main function will
 also recommended that you create a dummy `input` list in your script to
 simulate the reactive inputs. When you run the main function,
-`load_reactive_objects()`, it will pre-populate this list. You can learn
+`load_reactive_objects()`, it will prepopulate this list. You can learn
 more about dummy input lists in [this
 vignette](https://rjake.github.io/shinyobjects/articles/tips-and-tricks.html).
-The package also includes a function to view your UI elemnts in the
+The package also includes a function to view your UI elements in the
 viewer pane (see below).
 
 ## Installation
@@ -85,7 +85,7 @@ manipulation and reference your dummy `input` list. Note: **this
 function does not change your files**; the manipulation happens within
 the function.
 
-There are additional arguments you can use to resart R or to clear the
+There are additional arguments you can use to restart R or to clear the
 environment. The `keep` argument takes a regular expression as the
 pattern match. To get an exact match, use the `^` and `$` to signify the
 beginning and end (ex. `^your_text$`). To list objects, separate them
@@ -131,7 +131,7 @@ shiny::selectInput(
 ```
 
 Note that `close_after` is set to `NULL` in this example. The
-`view_ui()` function launches an app and defualts to closing after 5
+`view_ui()` function launches an app and defaults to closing after 5
 seconds. You can adjusts how long it runs or use `NULL` and stop it
 manually by using the stop sign.:red\_circle:
 

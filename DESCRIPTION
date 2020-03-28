@@ -25,4 +25,7 @@ VignetteBuilder: knitr
 Suggests: 
     rmarkdown,
     testthat,
-    mockery
+    mockery,
+    spelling,
+    covr
+Language: en-US
