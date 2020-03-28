@@ -1,5 +1,5 @@
 Package: shinyobjects
-Title: Loads reactive data frames and mock input list into environment
+Title: Allows Reactive Data to be Accessible in the Global Environment
 Version: 0.0.0.999
 Authors@R: person("Jake", "Riley", email = "rjake@sas.upenn.edu", role = c("aut", "cre"))
 Description: Troubleshooting reactive data in shiny can be difficult. These functions will convert reactive data frames into functions and load all assigned objects into your local environment. If you create a dummy input object, as the function will suggest, you will be available to simulate the reactive inputs your users will manipulate and test your server and ui functions in your local environment.
