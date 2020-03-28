@@ -3,10 +3,6 @@
 
 # shinyobjects
 
-<!-- badges: start -->
-
-<!-- badges: end -->
-
 Troubleshooting reactive data in a shiny app or flexdashboard can be
 difficult. The goal of this package is to access reactive objects in
 your local environment. This allows you to debug your code without

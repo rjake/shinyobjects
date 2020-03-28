@@ -14,11 +14,6 @@ knitr::opts_chunk$set(
 ```
 # shinyobjects
 
-<!-- badges: start -->
-[![Travis build status](https://travis-ci.org/rjake/shinyobjects.svg?branch=master)](https://travis-ci.org/rjake/shinyobjects)
-[![Codecov test coverage](https://codecov.io/gh/rjake/shinyobjects/branch/master/graph/badge.svg)](https://codecov.io/gh/rjake/shinyobjects?branch=master)
-<!-- badges: end -->
-
 Troubleshooting reactive data in a shiny app or flexdashboard can be difficult. The goal of this package is to access reactive objects in your local environment. This allows you to debug your code without having to actually run the app. It is my hope that this will save you time and allow you to iterate more quickly. The package converts reactive data frames into functions that will read from your raw data and become available in your global environment. The main function will also recommended that you create a dummy `input` list in your script to simulate the reactive inputs. When you run the main function, `load_reactive_objects()`, it will prepopulate this list. You can learn more about dummy input lists in [this vignette](https://rjake.github.io/shinyobjects/articles/tips-and-tricks.html). The package also includes a function to view your UI elements in the viewer pane (see below).
 
 ## Installation
