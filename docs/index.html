@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Loads reactive data frames and mock input list into environment • shinyobjects</title>
+<title>Allows Reactive Data to be Accessible in the Global Environment • shinyobjects</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
-<script src="pkgdown.js"></script><meta property="og:title" content="Loads reactive data frames and mock input list into environment">
+<script src="pkgdown.js"></script><meta property="og:title" content="Allows Reactive Data to be Accessible in the Global Environment">
 <meta property="og:description" content="Troubleshooting reactive data in shiny can be difficult. These functions will convert reactive data frames into functions and load all assigned objects into your local environment. If you create a dummy input object, as the function will suggest, you will be available to simulate the reactive inputs your users will manipulate and test your server and ui functions in your local environment.">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -58,6 +58,9 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="news/index.html">Changelog</a>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
 </div>
@@ -74,8 +77,6 @@
 <div id="shinyobjects" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#shinyobjects" class="anchor"></a>shinyobjects</h1></div>
-<!-- badges: start -->
-<!-- badges: end -->
 <p>Troubleshooting reactive data in a shiny app or flexdashboard can be difficult. The goal of this package is to access reactive objects in your local environment. This allows you to debug your code without having to actually run the app. It is my hope that this will save you time and allow you to iterate more quickly. The package converts reactive data frames into functions that will read from your raw data and become available in your global environment. The main function will also recommended that you create a dummy <code>input</code> list in your script to simulate the reactive inputs. When you run the main function, <code><a href="reference/load_reactive_objects.html">load_reactive_objects()</a></code>, it will prepopulate this list. You can learn more about dummy input lists in <a href="https://rjake.github.io/shinyobjects/articles/tips-and-tricks.html">this vignette</a>. The package also includes a function to view your UI elements in the viewer pane (see below).</p>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
