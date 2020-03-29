@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# shinyobjects
+# shinyobjects <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
 Troubleshooting reactive data in a shiny app or flexdashboard can be
 difficult. The goal of this package is to access reactive objects in
