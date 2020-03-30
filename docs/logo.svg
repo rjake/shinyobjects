@@ -246,9 +246,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.2991753"
-     inkscape:cx="-111.00569"
-     inkscape:cy="118.79667"
+     inkscape:zoom="0.86104878"
+     inkscape:cx="-272.78796"
+     inkscape:cy="78.720958"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      showgrid="false"
@@ -319,21 +319,22 @@
        transform="translate(-64.420354,-27.423246)" />
     <g
        id="g3139"
-       transform="translate(-90.361893,16.378876)"
+       transform="matrix(0.97494702,0,0,0.97494702,-87.305292,19.045514)"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300"
        style="stroke:#000000;stroke-opacity:0.51670951">
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:7.50545979px;line-height:0;font-family:Corbel;-inkscape-font-specification:'Corbel Bold';letter-spacing:0px;word-spacing:0px;display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.13;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.96887159"
-         x="95.752319"
-         y="28.176981"
-         id="text1533-6-4-6"><tspan
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.13088799px;line-height:0;font-family:'Arial Rounded MT Bold';-inkscape-font-specification:'Arial Rounded MT Bold,  Bold';letter-spacing:0px;word-spacing:0px;display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.11985058;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.96887159"
+         x="92.167809"
+         y="23.679842"
+         id="text1533-6-4-6"
+         transform="scale(0.98719353,1.0129726)"><tspan
            sodipodi:role="line"
            id="tspan1531-4-8-42"
-           x="95.752319"
-           y="28.176981"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.50545979px;font-family:'Franklin Gothic Medium';-inkscape-font-specification:'Franklin Gothic Medium, ';fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.13;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.96887159">shinyobjects</tspan></text>
+           x="92.167809"
+           y="23.679842"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:8.13088799px;line-height:0px;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.11985058;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.96887159">shinyobjects</tspan></text>
     </g>
     <flowRoot
        xml:space="preserve"
