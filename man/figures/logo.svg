@@ -16,7 +16,10 @@
    version="1.1"
    id="svg1757"
    inkscape:version="0.92.2 (5c3e80d, 2017-08-06)"
-   sodipodi:docname="logo.svg">
+   sodipodi:docname="logo.svg"
+   inkscape:export-filename="C:\Users\foxtr\Documents\GitHub\shinyobjects\man\figures\logo.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300">
   <defs
      id="defs1751">
     <linearGradient
@@ -151,19 +154,6 @@
        gradientTransform="matrix(0.68313256,-0.00974019,7.0181877e-4,0.0492192,24.210437,24.064843)"
        gradientUnits="userSpaceOnUse"
        spreadMethod="reflect" />
-    <filter
-       inkscape:collect="always"
-       style="color-interpolation-filters:sRGB"
-       id="filter2834"
-       x="-0.014043654"
-       width="1.0280873"
-       y="-0.082462026"
-       height="1.1649241">
-      <feGaussianBlur
-         inkscape:collect="always"
-         stdDeviation="0.22443074"
-         id="feGaussianBlur2836" />
-    </filter>
     <radialGradient
        inkscape:collect="always"
        xlink:href="#linearGradient2688"
@@ -182,18 +172,6 @@
        id="radialGradient2935"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0.64729666,-0.0558048,0.00946902,0.10983405,40.148077,27.940702)"
-       cx="111.1931"
-       cy="21.451035"
-       fx="111.1931"
-       fy="21.451035"
-       r="19.177124"
-       spreadMethod="reflect" />
-    <radialGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient2688"
-       id="radialGradient2886-1"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.64729666,-0.0558048,0.00946902,0.10983405,41.253316,29.773603)"
        cx="111.1931"
        cy="21.451035"
        fx="111.1931"
@@ -268,9 +246,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.1622802"
-     inkscape:cx="-33.4286"
-     inkscape:cy="150.65401"
+     inkscape:zoom="1.2991753"
+     inkscape:cx="-111.00569"
+     inkscape:cy="118.79667"
      inkscape:document-units="mm"
      inkscape:current-layer="layer2"
      showgrid="false"
@@ -295,7 +273,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -312,7 +290,9 @@
        height="61.53577"
        width="61.53577"
        clip-path="url(#clipPath2441)"
-       transform="matrix(0.97990271,0,0,0.97990271,-0.28428322,-33.81923)" />
+       transform="matrix(0.97990271,0,0,0.97990271,-0.38432849,-33.81923)"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
   </g>
   <g
      inkscape:label="Layer 1"
@@ -339,51 +319,21 @@
        transform="translate(-64.420354,-27.423246)" />
     <g
        id="g3139"
-       transform="translate(-89.689327,15.564257)">
+       transform="translate(-90.361893,16.378876)"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300"
+       style="stroke:#000000;stroke-opacity:0.51670951">
       <text
          xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:0;font-family:'Arial Unicode MS';-inkscape-font-specification:'Arial Unicode MS';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.29309958;filter:url(#filter2834)"
-         x="95.459389"
-         y="27.269623"
-         id="text1533-6"><tspan
-           sodipodi:role="line"
-           id="tspan1531-4"
-           x="95.459389"
-           y="27.269623"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;font-family:'Arial Unicode MS';-inkscape-font-specification:'Arial Unicode MS';fill:#000000;fill-opacity:1;stroke-width:0.29309958">shinyobjects</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:0;font-family:'Arial Unicode MS';-inkscape-font-specification:'Arial Unicode MS';letter-spacing:0px;word-spacing:0px;display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:0.29309958"
-         x="95.858597"
-         y="27.307194"
-         id="text1533-6-4-2"><tspan
-           sodipodi:role="line"
-           id="tspan1531-4-8-6"
-           x="95.858597"
-           y="27.307194"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;font-family:'Arial Unicode MS';-inkscape-font-specification:'Arial Unicode MS';fill:#ffffff;fill-opacity:1;stroke-width:0.29309958">shinyobjects</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:0;font-family:'Arial Unicode MS';-inkscape-font-specification:'Arial Unicode MS';letter-spacing:0px;word-spacing:0px;display:inline;opacity:1;fill:#939393;fill-opacity:1;stroke:none;stroke-width:0.29309958"
-         x="95.926102"
-         y="27.31707"
-         id="text1533-6-4-2-3"><tspan
-           sodipodi:role="line"
-           id="tspan1531-4-8-6-9"
-           x="95.926102"
-           y="27.31707"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;font-family:'Arial Unicode MS';-inkscape-font-specification:'Arial Unicode MS';fill:#939393;fill-opacity:1;stroke-width:0.29309958">shinyobjects</tspan></text>
-      <text
-         xml:space="preserve"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:0;font-family:Arial;-inkscape-font-specification:Arial;letter-spacing:0px;word-spacing:0px;display:inline;opacity:1;fill:url(#radialGradient2886-1);fill-opacity:1;stroke:none;stroke-width:0.29309958"
-         x="96.024872"
-         y="27.158663"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:7.50545979px;line-height:0;font-family:Corbel;-inkscape-font-specification:'Corbel Bold';letter-spacing:0px;word-spacing:0px;display:inline;opacity:1;fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.13;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.96887159"
+         x="95.752319"
+         y="28.176981"
          id="text1533-6-4-6"><tspan
            sodipodi:role="line"
            id="tspan1531-4-8-42"
-           x="96.024872"
-           y="27.158663"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;font-family:Arial;-inkscape-font-specification:Arial;fill:url(#radialGradient2886-1);fill-opacity:1;stroke-width:0.29309958">shinyobjects</tspan></text>
+           x="95.752319"
+           y="28.176981"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.50545979px;font-family:'Franklin Gothic Medium';-inkscape-font-specification:'Franklin Gothic Medium, ';fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0.13;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0.96887159">shinyobjects</tspan></text>
     </g>
     <flowRoot
        xml:space="preserve"
@@ -396,7 +346,7 @@
            height="109.22436"
            x="513.41986"
            y="-61.382" /></flowRegion><flowPara
-         id="flowPara3009"></flowPara></flowRoot>  </g>
+         id="flowPara3009" /></flowRoot>  </g>
   <g
      inkscape:groupmode="layer"
      id="layer3"
@@ -417,6 +367,8 @@
        inkscape:randomized="0"
        d="M 189.12869,53.62344 170.1534,64.074352 151.615,52.866726 l 0.43689,-21.65854 18.97528,-10.450911 18.53841,11.207627 z"
        inkscape:transform-center-x="6.4651728e-006"
-       transform="matrix(1.3314708,-0.02554434,0.02554434,1.3314708,-202.98062,-22.888311)" />
+       transform="matrix(1.3314708,-0.02554434,0.02554434,1.3314708,-202.98062,-22.888311)"
+       inkscape:export-xdpi="300"
+       inkscape:export-ydpi="300" />
   </g>
 </svg>
