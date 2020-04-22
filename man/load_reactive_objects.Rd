@@ -8,7 +8,8 @@ load_reactive_objects(
   file,
   clear_environment = FALSE,
   restart = FALSE,
-  keep = NULL
+  keep = NULL,
+  envir = .GlobalEnv
 )
 }
 \arguments{
@@ -19,6 +20,8 @@ load_reactive_objects(
 \item{restart}{When \code{TRUE}, will restart the current R session. If you have R default to restore RData by default, you will need to use the \code{clear_environment} argument as well}
 
 \item{keep}{a regular expression of objects to keep when \code{clear_environment = TRUE}}
+
+\item{envir}{the environment shinyobjects should the load the objects into. The default is the global environment \code{.GlobalEnv}.}
 }
 \description{
 This function will run all assignments of your R or Rmd. file In the process, this function will encourage the creation of a dummy \code{input} list that will mimic user input and allow your code to run. Lastly, reactive objects are converted to functions so they can still be called as \code{df()} etc.
