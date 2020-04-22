@@ -8,6 +8,13 @@
 
 <title>Load inputs and convert reactive functions from an R/Rmd script to your global environment — load_reactive_objects • shinyobjects</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -37,6 +44,7 @@
 
 <meta property="og:title" content="Load inputs and convert reactive functions from an R/Rmd script to your global environment — load_reactive_objects" />
 <meta property="og:description" content="This function will run all assignments of your R or Rmd. file In the process, this function will encourage the creation of a dummy input list that will mimic user input and allow your code to run. Lastly, reactive objects are converted to functions so they can still be called as df() etc." />
+<meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -69,7 +77,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shinyobjects</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.999</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -95,6 +103,9 @@
       <a href="../articles/tips-and-tricks.html">Tips and Tricks</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -125,7 +136,8 @@
   <span class='no'>file</span>,
   <span class='kw'>clear_environment</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>restart</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>keep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+  <span class='kw'>keep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>envir</span> <span class='kw'>=</span> <span class='no'>.GlobalEnv</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -146,6 +158,10 @@
     <tr>
       <th>keep</th>
       <td><p>a regular expression of objects to keep when <code>clear_environment = TRUE</code></p></td>
+    </tr>
+    <tr>
+      <th>envir</th>
+      <td><p>the environment shinyobjects should the load the objects into. The default is the global environment <code>.GlobalEnv</code>.</p></td>
     </tr>
     </table>
 
