@@ -8,6 +8,7 @@
 #' @param clear_environment When \code{TRUE}, will remove objects not named in \code{...}
 #' @param restart When \code{TRUE}, will restart the current R session. If you have R default to restore RData by default, you will need to use the \code{clear_environment} argument as well 
 #' @param keep a regular expression of objects to keep when \code{clear_environment = TRUE}
+#' @param envir the environment shinyobjects should the load the objects into. The default is the global environment \code{.GlobalEnv}.
 #'
 #' @export
 #' @importFrom readr read_lines
@@ -28,7 +29,8 @@
 load_reactive_objects <- function(file,
                                   clear_environment = FALSE,
                                   restart = FALSE,
-                                  keep = NULL) {
+                                  keep = NULL, 
+                                  envir = .GlobalEnv) {
 
   # create temp folder
   #temp_folder <- tempdir(check = TRUE)
@@ -67,7 +69,7 @@ load_reactive_objects <- function(file,
 
     if (result %in% c("cleared", "proceed")) {
       # * load inputs ----
-      eval(parse(text = find_input_code(file_to_parse)), envir = .GlobalEnv)
+      eval(parse(text = find_input_code(file_to_parse)), envir = envir)
 
       # find all libraries and functions ----
       
@@ -96,12 +98,12 @@ load_reactive_objects <- function(file,
       parsed_code <- parse(text = text_to_parse)
       
       # create ouput & session lists so assignments don't break
-      assign("output", list(), .GlobalEnv)
-      assign("session", list(), .GlobalEnv)
+      assign("output", list(), envir)
+      assign("session", list(), envir)
       
       # final evaluation
       for (i in seq_along(parsed_code)) {
-        eval_code(parsed_code[i])
+        eval_code(parsed_code[i], envir = envir)
       }
     }
   }
