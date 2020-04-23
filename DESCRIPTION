@@ -2,7 +2,7 @@ Package: shinyobjects
 Title: Allows Reactive Data to be Accessible in an Interactive Environment
 Version: 0.1.0
 Authors@R: person("Jake", "Riley", email = "rjake@sas.upenn.edu", role = c("aut", "cre"))
-Description: Troubleshooting reactive data in shiny can be difficult. These functions will convert reactive data frames into functions and load all assigned objects into your local environment. If you create a dummy input object, as the function will suggest, you will be available to simulate the reactive inputs your users will manipulate and test your server and ui functions interactively.
+Description: Troubleshooting reactive data in shiny can be difficult. These functions will convert reactive data frames into functions and load all assigned objects into your local environment. If you create a dummy input object, as the function will suggest, you will be able to test your server and ui functions interactively.
 BugReports: https://github.com/rjake/shinyobjects/issues
 License: GPL-3
 Encoding: UTF-8
