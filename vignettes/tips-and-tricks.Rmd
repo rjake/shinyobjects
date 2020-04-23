@@ -33,7 +33,7 @@ input <-list(
 ```
 ````
 
-With the dummy `input` object created earlier, I am able to run the `df` and subsequent `ggplot()` code locally in the console. As a note, running all of `renderPlot()` will only show text in the console but if you run the `df <-` section and the `ggplot()` section, you will have access to `df` in your global environment and see the bar chart in the plot pane of RStudio.
+With the dummy `input` object created earlier, I am able to run the `df` and subsequent `ggplot()` code locally in the console. As a note, running all of `renderPlot()` will only show text in the console but if you run the `df <-` section and the `ggplot()` section, you will have access to `df` in your environment and see the bar chart in the plot pane of RStudio.
 
 ```{r show_plot}
 library(tidyverse)

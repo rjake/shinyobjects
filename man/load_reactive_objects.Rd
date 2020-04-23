@@ -2,7 +2,7 @@
 % Please edit documentation in R/load_reactive_objects.R
 \name{load_reactive_objects}
 \alias{load_reactive_objects}
-\title{Load inputs and convert reactive functions from an R/Rmd script to your global environment}
+\title{Load inputs and convert reactive functions from an R/Rmd script to your environment}
 \usage{
 load_reactive_objects(
   file,
@@ -13,7 +13,7 @@ load_reactive_objects(
 )
 }
 \arguments{
-\item{file}{Rmd to be evaluated and loaded into global environment}
+\item{file}{Rmd to be evaluated and loaded into your environment}
 
 \item{clear_environment}{When \code{TRUE}, will remove objects not named in \code{...}}
 
@@ -28,7 +28,7 @@ This function will run all assignments of your R or Rmd. file In the process, th
 }
 \section{Warning}{
 
-This function has the ability to overwrite your objects in your global environment. Make sure you understand how this function works before moving forward.
+This function has the ability to overwrite your objects in your environment. Make sure you understand how this function works before moving forward.
 }
 
 \examples{

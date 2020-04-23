@@ -1,10 +1,10 @@
-#' Load inputs and convert reactive functions from an R/Rmd script to your global environment
+#' Load inputs and convert reactive functions from an R/Rmd script to your environment
 #' 
 #' @description This function will run all assignments of your R or Rmd. file In the process, this function will encourage the creation of a dummy \code{input} list that will mimic user input and allow your code to run. Lastly, reactive objects are converted to functions so they can still be called as \code{df()} etc.
 #' @section Warning:
-#' This function has the ability to overwrite your objects in your global environment. Make sure you understand how this function works before moving forward.
+#' This function has the ability to overwrite your objects in your environment. Make sure you understand how this function works before moving forward.
 #' 
-#' @param file Rmd to be evaluated and loaded into global environment
+#' @param file Rmd to be evaluated and loaded into your environment
 #' @param clear_environment When \code{TRUE}, will remove objects not named in \code{...}
 #' @param restart When \code{TRUE}, will restart the current R session. If you have R default to restore RData by default, you will need to use the \code{clear_environment} argument as well 
 #' @param keep a regular expression of objects to keep when \code{clear_environment = TRUE}
@@ -48,7 +48,7 @@ load_reactive_objects <- function(file,
   # confirm to continue
   confirm <-   menu(
     choices = c("Yes", "No"),
-    title = "WARNING: This next step will load all object assignments into your global environment.\nDo you want to continue?"
+    title = "WARNING: This next step will load all object assignments into your environment.\nDo you want to continue?"
   )
   
 

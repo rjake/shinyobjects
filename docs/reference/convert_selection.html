@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Convert and load the highlighted assignment to the global environment — convert_selection • shinyobjects</title>
+<title>Convert and load the highlighted assignment to your environment — convert_selection • shinyobjects</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,7 +42,7 @@
 
 
 
-<meta property="og:title" content="Convert and load the highlighted assignment to the global environment — convert_selection" />
+<meta property="og:title" content="Convert and load the highlighted assignment to your environment — convert_selection" />
 <meta property="og:description" content="After highlighting the assignment in the source editor, go to 
 the console and run this function. The selected code will be run 
 and if it is reactive, it will be loaded as a function." />
@@ -125,7 +125,7 @@ and if it is reactive, it will be loaded as a function." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Convert and load the highlighted assignment to the global environment</h1>
+    <h1>Convert and load the highlighted assignment to your environment</h1>
     
     <div class="hidden name"><code>convert_selection.Rd</code></div>
     </div>
@@ -136,14 +136,23 @@ the console and run this function. The selected code will be run
 and if it is reactive, it will be loaded as a function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>convert_selection</span>()</pre>
+    <pre class="usage"><span class='fu'>convert_selection</span>(<span class='kw'>envir</span> <span class='kw'>=</span> <span class='no'>.GlobalEnv</span>)</pre>
 
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>envir</th>
+      <td><p>the environment shinyobjects should the load the objects into. The default is the global environment <code>.GlobalEnv</code>.</p></td>
+    </tr>
+    </table>
 
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
     </ul>
 
   </div>

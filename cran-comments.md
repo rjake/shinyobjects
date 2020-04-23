@@ -8,4 +8,3 @@
 0 errors | 0 warnings | 1 note
 
 * This is a new release.
-* The note that flags is because this package writes to the global environment. This is the goal of the package as it allows the user to troubleshoot reactive shiny code locally rather than having to launch the app. This behavior is mentioned several times in the documenation and README and there is a prompt for the user to acknowledge prior to executing the function.

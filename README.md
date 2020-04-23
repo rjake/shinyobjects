@@ -9,8 +9,8 @@ your local environment. This allows you to debug your code without
 having to actually run the app. It is my hope that this will save you
 time and allow you to iterate more quickly. The package converts
 reactive data frames into functions that will read from your raw data
-and become available in your global environment. The main function will
-also recommended that you create a dummy `input` list in your script to
+and become available in your environment. The main function will also
+recommended that you create a dummy `input` list in your script to
 simulate the reactive inputs. When you run the main function,
 `load_reactive_objects()`, it will prepopulate this list. You can learn
 more about dummy input lists in [this
@@ -68,14 +68,14 @@ This will result in the following output
     )
     ```
     
-    WARNING: This next step will load all object assignments into your global environment.
+    WARNING: This next step will load all object assignments into your environment.
     Do you want to continue? 
     
     1: Yes
     2: No
 
-Hitting `1` will then update your global environment with all raw data
-and assignments, your dummy `input` list, and all reactive objects
+Hitting `1` will then update your environment with all raw data and
+assignments, your dummy `input` list, and all reactive objects will be
 converted to functions. As functions, the code will keep all the data
 manipulation and reference your dummy `input` list. Note: **this
 function does not change your files**; the manipulation happens within

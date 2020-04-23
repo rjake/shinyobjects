@@ -2,9 +2,12 @@
 % Please edit documentation in R/source_editor_context.R
 \name{convert_selection}
 \alias{convert_selection}
-\title{Convert and load the highlighted assignment to the global environment}
+\title{Convert and load the highlighted assignment to your environment}
 \usage{
-convert_selection()
+convert_selection(envir = .GlobalEnv)
+}
+\arguments{
+\item{envir}{the environment shinyobjects should the load the objects into. The default is the global environment \code{.GlobalEnv}.}
 }
 \description{
 After highlighting the assignment in the source editor, go to 
