@@ -15,7 +15,7 @@ view_ui(x, close_after = 5)
 Show UI output in viewer pane
 }
 \examples{
-\dontrun{
+if (interactive()) {
 # run this line
 shiny::selectInput(
   "state",
