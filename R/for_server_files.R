@@ -7,7 +7,7 @@
 #' @importFrom stringr str_locate_all
 #' @noRd
 #' @examples
-#'  \dontrun{
+#' if (interactive()) {
 #' "here is text (between two parentheses), as an example" %>% 
 #'   char_between("p")
 #'   
@@ -46,7 +46,7 @@ char_between <- function(text, pattern = c("c", "p")) {
 #' @param file file to parse
 #' @noRd
 #' @examples 
-#' \dontrun{
+#' if (interactive()) {
 #' breakout_server_code(file = "inst/shiny/server.R") %>% 
 #'   eval(envir = .GlobalEnv)
 #' }

@@ -8,14 +8,15 @@
 #' @param clear_environment When \code{TRUE}, will remove objects not named in \code{...}
 #' @param restart When \code{TRUE}, will restart the current R session. If you have R default to restore RData by default, you will need to use the \code{clear_environment} argument as well 
 #' @param keep a regular expression of objects to keep when \code{clear_environment = TRUE}
-#' @param envir the environment shinyobjects should the load the objects into. The default is the global environment \code{.GlobalEnv}.
+#' @param envir the environment shinyobjects should the load the objects into.
 #'
 #' @export
 #' @importFrom readr read_lines
 #' @importFrom rstudioapi restartSession
 #'
 #' @examples
-#' \dontrun{
+#' if (interactive()) {
+#' 
 #' system.file(package = "shinyobjects", "Rmd/test_dashboard.Rmd") %>% 
 #'  load_reactive_objects()
 #' 
@@ -30,12 +31,10 @@ load_reactive_objects <- function(file,
                                   clear_environment = FALSE,
                                   restart = FALSE,
                                   keep = NULL, 
-                                  envir = .GlobalEnv) {
+                                  envir = globalenv()) {
 
-  # create temp folder
-  #temp_folder <- tempdir(check = TRUE)
-  #temp_R <- tempfile(tmpdir = temp_folder, fileext = ".R")
-
+  stopifnot(interactive())
+  
   # select file if not provided
   file_to_parse <- which_file(file)
 
