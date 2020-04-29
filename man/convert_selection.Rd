@@ -7,7 +7,7 @@
 convert_selection(envir = .GlobalEnv)
 }
 \arguments{
-\item{envir}{the environment shinyobjects should the load the objects into. The default is the global environment \code{.GlobalEnv}.}
+\item{envir}{the environment shinyobjects should the load the objects into.}
 }
 \description{
 After highlighting the assignment in the source editor, go to 

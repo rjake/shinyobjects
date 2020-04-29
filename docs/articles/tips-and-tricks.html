@@ -97,54 +97,54 @@
 <h2 class="hasAnchor">
 <a href="#create-a-chunk-to-hold-dummy-input-values" class="anchor"></a>Create a chunk to hold dummy input values</h2>
 <p>If you create a chunk like the code below, you will be able to simulate reactive values like <code>input$displ</code> and <code>input$year</code> without having to run the whole dashboard. The <code>input</code> object created here is a list containing 3 elements (<code>displ</code>, <code>year</code>, and <code>drv</code>). By creating the list named <code>input</code> in a chunk of your code, you can simulate the way the values will work when it actually runs. Do note, you will need to use <code>eval = FALSE</code> in the chunk so this part of your code will be ignored when the dashboard is run.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="st">```</span><span class="dt">{r input_demo, eval = FALSE}</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="dt">input &lt;-list(</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="dt">  displ = 1.8,</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="dt">  year = 2008,</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="dt">  drv = "f"</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="dt">)</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a></span>
-<span id="cb1-8"><a href="#cb1-8"></a><span class="st">```</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="st">```</span><span class="dt">{r input_demo, eval = FALSE}</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="dt">input &lt;-list(</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="dt">  displ = 1.8,</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="dt">  year = 2008,</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="dt">  drv = "f"</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="dt">)</span></a>
+<a class="sourceLine" id="cb1-7" title="7"></a>
+<a class="sourceLine" id="cb1-8" title="8"><span class="st">```</span></a></code></pre></div>
 <p>With the dummy <code>input</code> object created earlier, I am able to run the <code>df</code> and subsequent <code>ggplot()</code> code locally in the console. As a note, running all of <code>renderPlot()</code> will only show text in the console but if you run the <code>df &lt;-</code> section and the <code>ggplot()</code> section, you will have access to <code>df</code> in your environment and see the bar chart in the plot pane of RStudio.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyverse)</span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(shiny)</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a>raw_data &lt;-<span class="st"> </span>mpg</span>
-<span id="cb2-5"><a href="#cb2-5"></a></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="kw">renderPlot</span>({</span>
-<span id="cb2-7"><a href="#cb2-7"></a>  df &lt;-<span class="st"> </span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="st">    </span>raw_data <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb2-9"><a href="#cb2-9"></a><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(</span>
-<span id="cb2-10"><a href="#cb2-10"></a>      displ <span class="op">&gt;=</span><span class="st"> </span>input<span class="op">$</span>displ,</span>
-<span id="cb2-11"><a href="#cb2-11"></a>      year <span class="op">==</span><span class="st"> </span>input<span class="op">$</span>year,</span>
-<span id="cb2-12"><a href="#cb2-12"></a>      drv <span class="op">==</span><span class="st"> </span>input<span class="op">$</span>drv</span>
-<span id="cb2-13"><a href="#cb2-13"></a>    )</span>
-<span id="cb2-14"><a href="#cb2-14"></a></span>
-<span id="cb2-15"><a href="#cb2-15"></a>  <span class="kw">ggplot</span>(df, <span class="kw">aes</span>(class)) <span class="op">+</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="st">    </span><span class="kw">geom_bar</span>()</span>
-<span id="cb2-17"><a href="#cb2-17"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(tidyverse)</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(shiny)</a>
+<a class="sourceLine" id="cb2-3" title="3"></a>
+<a class="sourceLine" id="cb2-4" title="4">raw_data &lt;-<span class="st"> </span>mpg</a>
+<a class="sourceLine" id="cb2-5" title="5"></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="kw">renderPlot</span>({</a>
+<a class="sourceLine" id="cb2-7" title="7">  df &lt;-<span class="st"> </span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="st">    </span>raw_data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(</a>
+<a class="sourceLine" id="cb2-10" title="10">      displ <span class="op">&gt;=</span><span class="st"> </span>input<span class="op">$</span>displ,</a>
+<a class="sourceLine" id="cb2-11" title="11">      year <span class="op">==</span><span class="st"> </span>input<span class="op">$</span>year,</a>
+<a class="sourceLine" id="cb2-12" title="12">      drv <span class="op">==</span><span class="st"> </span>input<span class="op">$</span>drv</a>
+<a class="sourceLine" id="cb2-13" title="13">    )</a>
+<a class="sourceLine" id="cb2-14" title="14"></a>
+<a class="sourceLine" id="cb2-15" title="15">  <span class="kw">ggplot</span>(df, <span class="kw">aes</span>(class)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="st">    </span><span class="kw">geom_bar</span>()</a>
+<a class="sourceLine" id="cb2-17" title="17">})</a></code></pre></div>
 </div>
 <div id="put-reactive-objects-within-their-reactive-outputs" class="section level2">
 <h2 class="hasAnchor">
 <a href="#put-reactive-objects-within-their-reactive-outputs" class="anchor"></a>Put reactive objects within their reactive outputs</h2>
 <p>I often see something like the code below. Notice that there are two reactive steps: <code>reactive()</code> to create the reactive data frame and then <code>renderPlot()</code>.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>reactive_df &lt;-<span class="st"> </span><span class="kw">reactive</span>(</span>
-<span id="cb3-2"><a href="#cb3-2"></a>  raw_data <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(displ <span class="op">&gt;=</span><span class="st"> </span>input<span class="op">$</span>displ)</span>
-<span id="cb3-4"><a href="#cb3-4"></a>)</span>
-<span id="cb3-5"><a href="#cb3-5"></a></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="kw">renderPlot</span>(</span>
-<span id="cb3-7"><a href="#cb3-7"></a>  <span class="kw">ggplot</span>(<span class="kw">reactive_df</span>(), <span class="kw">aes</span>(class)) <span class="op">+</span></span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="st">    </span><span class="kw">geom_bar</span>()</span>
-<span id="cb3-9"><a href="#cb3-9"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">reactive_df &lt;-<span class="st"> </span><span class="kw">reactive</span>(</a>
+<a class="sourceLine" id="cb3-2" title="2">  raw_data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(displ <span class="op">&gt;=</span><span class="st"> </span>input<span class="op">$</span>displ)</a>
+<a class="sourceLine" id="cb3-4" title="4">)</a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="kw">renderPlot</span>(</a>
+<a class="sourceLine" id="cb3-7" title="7">  <span class="kw">ggplot</span>(<span class="kw">reactive_df</span>(), <span class="kw">aes</span>(class)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="st">    </span><span class="kw">geom_bar</span>()</a>
+<a class="sourceLine" id="cb3-9" title="9">)</a></code></pre></div>
 <p>If this reactive data frame is created <em>only</em> for this one plot, you can embed the data manipulation within the <code>renderPlot()</code> function. If this data will be used thin two or more outputs in the dashboard and has a lot of data manipulation, a reactive dataframe is a good idea.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">renderPlot</span>({</span>
-<span id="cb4-2"><a href="#cb4-2"></a>  df &lt;-</span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="st">    </span>raw_data <span class="op">%&gt;%</span><span class="st"> </span></span>
-<span id="cb4-4"><a href="#cb4-4"></a><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(displ <span class="op">&gt;=</span><span class="st"> </span>input<span class="op">$</span>displ)</span>
-<span id="cb4-5"><a href="#cb4-5"></a>    </span>
-<span id="cb4-6"><a href="#cb4-6"></a>  <span class="kw">ggplot</span>(df, <span class="kw">aes</span>(class)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>()</span>
-<span id="cb4-7"><a href="#cb4-7"></a>})</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">renderPlot</span>({</a>
+<a class="sourceLine" id="cb4-2" title="2">  df &lt;-</a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="st">    </span>raw_data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="st">    </span><span class="kw"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(displ <span class="op">&gt;=</span><span class="st"> </span>input<span class="op">$</span>displ)</a>
+<a class="sourceLine" id="cb4-5" title="5">    </a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="kw">ggplot</span>(df, <span class="kw">aes</span>(class)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_bar</span>()</a>
+<a class="sourceLine" id="cb4-7" title="7">})</a></code></pre></div>
 <p>When you add curly braces <code>{...}</code> inside the <code>renderPlot()</code> it creates a mini environment where you can create multiple objects. This is similar to how you might do the same in a <code>function() {...}</code> or a loop <code>for(i in 1:10) {...}</code></p>
 </div>
 <div id="in-summary" class="section level2">

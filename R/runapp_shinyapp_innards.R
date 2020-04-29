@@ -4,7 +4,7 @@
 #' @param fn the function to sub out
 #' @noRd
 #' @examples
-#'  \dontrun{
+#' if (interactive()) {
 #' x <- "mean(list(1:10, 10:30))"
 #' guts(x, "mean")
 #' guts(x, "mean") %>% guts("list")

@@ -3,7 +3,7 @@
 
 # shinyobjects <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
-Troubleshooting reactive data in a shiny app or flexdashboard can be
+Troubleshooting reactive data in a `shiny` app or `flexdashboard` can be
 difficult. The goal of this package is to access reactive objects in
 your local environment. This allows you to debug your code without
 having to actually run the app. It is my hope that this will save you

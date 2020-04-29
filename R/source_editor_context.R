@@ -5,7 +5,7 @@
 #' After highlighting the assignment in the source editor, go to 
 #' the console and run this function. The selected code will be run 
 #' and if it is reactive, it will be loaded as a function.
-#' @param envir the environment shinyobjects should the load the objects into. The default is the global environment \code{.GlobalEnv}.
+#' @param envir the environment shinyobjects should the load the objects into.
 #' @export
 #' 
 #' @importFrom rstudioapi getSourceEditorContext

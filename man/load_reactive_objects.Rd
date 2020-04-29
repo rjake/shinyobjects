@@ -9,7 +9,7 @@ load_reactive_objects(
   clear_environment = FALSE,
   restart = FALSE,
   keep = NULL,
-  envir = .GlobalEnv
+  envir = globalenv()
 )
 }
 \arguments{
@@ -21,7 +21,7 @@ load_reactive_objects(
 
 \item{keep}{a regular expression of objects to keep when \code{clear_environment = TRUE}}
 
-\item{envir}{the environment shinyobjects should the load the objects into. The default is the global environment \code{.GlobalEnv}.}
+\item{envir}{the environment shinyobjects should the load the objects into.}
 }
 \description{
 This function will run all assignments of your R or Rmd. file In the process, this function will encourage the creation of a dummy \code{input} list that will mimic user input and allow your code to run. Lastly, reactive objects are converted to functions so they can still be called as \code{df()} etc.
@@ -32,7 +32,8 @@ This function has the ability to overwrite your objects in your environment. Mak
 }
 
 \examples{
-\dontrun{
+if (interactive()) {
+
 system.file(package = "shinyobjects", "Rmd/test_dashboard.Rmd") \%>\% 
  load_reactive_objects()
 

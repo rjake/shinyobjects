@@ -6,7 +6,7 @@
 #' @importFrom rstudioapi viewer
 #' @export
 #' @examples 
-#' \dontrun{
+#' if (interactive()) {
 #' # run this line
 #' shiny::selectInput(
 #'   "state",

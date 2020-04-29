@@ -112,7 +112,7 @@ code_to_df <- function(code) {
 #' @importFrom knitr purl
 #' @noRd
 #' @examples 
-#' \dontrun{
+#' if (interactive()) {
 #' find_input_code("inst/shiny/server.R")
 #' find_input_code("inst/Rmd/flexdashboard_demo.Rmd")
 #' }
@@ -157,8 +157,8 @@ find_input_code <- function(file){
 #' @importFrom tidyr unnest
 #' @importFrom glue glue glue_collapse
 #' @noRd
-#'@examples
-#'\dontrun{
+#' @examples
+#' if (interactive()) {
 #' input_usage(file = "inst/shiny/server.R")
 #' input_usage(file = "inst/Rmd/flexdashboard_demo.Rmd")
 #' }
@@ -206,7 +206,7 @@ input_usage <- function(file) {
 #' @importFrom styler style_text
 #' @noRd
 #' @examples 
-#' \dontrun{
+#' if (interactive()) {
 #' validate_inputs("inst/Rmd/test_dashboard_missing_inputs.Rmd")
 #' validate_inputs("inst/Rmd/test_dashboard_no_inputs.Rmd")
 #' validate_inputs("inst/shiny/server.R")
@@ -288,7 +288,7 @@ validate_inputs <- function(file) {
 #' @importFrom utils menu
 #' @noRd
 #' @examples
-#' \dontrun{
+#' if (interactive()) {
 #' df <- iris
 #' df2 <- iris
 #' my_df <- iris
