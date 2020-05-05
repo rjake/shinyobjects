@@ -215,10 +215,7 @@ validate_inputs <- function(file) {
   input_code <- find_input_code(file)
   input_use <- input_usage(file)
   
-  if (nrow(input_use) == 0) {
-    print("No input$... objects listed")
-  } else {
-      
+  if (nrow(input_use) > 0) {
     input_demo_values <-
       input_code %>%
       str_extract_all("([\\w\\.\\_0:9]+)(?=\\s\\=)") %>%
@@ -232,13 +229,7 @@ validate_inputs <- function(file) {
       )
     
     
-    if (nrow(input_ref) == 0) { # no inputs
-      print("No input$... objects listed")
-      
-    } else if (sum(input_ref$missing) == 0) { # no missing references
-      message("\nAll inputs accounted for :)\n")
-      
-    } else { # missing references
+    if (nrow(input_ref) > 0 & sum(input_ref$missing) > 0) { # missing references
       message("Here are the inputs you have listed:\n")
       input_ref %>%
         select(.data$status, input = .data$input_name, .data$lines) %>%
