@@ -6,22 +6,22 @@
 \usage{
 load_reactive_objects(
   file,
-  clear_environment = FALSE,
   restart = FALSE,
-  keep = NULL,
-  envir = globalenv()
+  envir = NULL,
+  clear_environment = FALSE,
+  keep = NULL
 )
 }
 \arguments{
 \item{file}{Rmd to be evaluated and loaded into your environment}
 
-\item{clear_environment}{When \code{TRUE}, will remove objects not named in \code{...}}
-
 \item{restart}{When \code{TRUE}, will restart the current R session. If you have R default to restore RData by default, you will need to use the \code{clear_environment} argument as well}
 
-\item{keep}{a regular expression of objects to keep when \code{clear_environment = TRUE}}
-
 \item{envir}{the environment shinyobjects should the load the objects into.}
+
+\item{clear_environment}{When \code{TRUE}, will remove objects not named in \code{...}}
+
+\item{keep}{a regular expression of objects to keep when \code{clear_environment = TRUE}}
 }
 \description{
 This function will run all assignments of your R or Rmd. file In the process, this function will encourage the creation of a dummy \code{input} list that will mimic user input and allow your code to run. Lastly, reactive objects are converted to functions so they can still be called as \code{df()} etc.
@@ -33,15 +33,13 @@ This function has the ability to overwrite your objects in your environment. Mak
 
 \examples{
 if (interactive()) {
+  system.file(package = "shinyobjects", "Rmd/test_dashboard.Rmd") \%>\%
+    load_reactive_objects()
 
-system.file(package = "shinyobjects", "Rmd/test_dashboard.Rmd") \%>\% 
- load_reactive_objects()
+  system.file(package = "shinyobjects", "Rmd/test_dashboard_no_inputs.Rmd") \%>\%
+    load_reactive_objects()
 
-system.file(package = "shinyobjects", "Rmd/test_dashboard_no_inputs.Rmd") \%>\% 
- load_reactive_objects()
-
-system.file(package = "shinyobjects", "Rmd/test_dashboard_missing_inputs.Rmd") \%>\% 
- load_reactive_objects()
+  system.file(package = "shinyobjects", "Rmd/test_dashboard_missing_inputs.Rmd") \%>\%
+    load_reactive_objects()
 }
-
 }

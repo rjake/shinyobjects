@@ -134,10 +134,10 @@
 
     <pre class="usage"><span class='fu'>load_reactive_objects</span>(
   <span class='no'>file</span>,
-  <span class='kw'>clear_environment</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>restart</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>keep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>envir</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/environment.html'>globalenv</a></span>()
+  <span class='kw'>envir</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>clear_environment</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
+  <span class='kw'>keep</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -148,20 +148,20 @@
       <td><p>Rmd to be evaluated and loaded into your environment</p></td>
     </tr>
     <tr>
-      <th>clear_environment</th>
-      <td><p>When <code>TRUE</code>, will remove objects not named in <code>...</code></p></td>
-    </tr>
-    <tr>
       <th>restart</th>
       <td><p>When <code>TRUE</code>, will restart the current R session. If you have R default to restore RData by default, you will need to use the <code>clear_environment</code> argument as well</p></td>
     </tr>
     <tr>
-      <th>keep</th>
-      <td><p>a regular expression of objects to keep when <code>clear_environment = TRUE</code></p></td>
-    </tr>
-    <tr>
       <th>envir</th>
       <td><p>the environment shinyobjects should the load the objects into.</p></td>
+    </tr>
+    <tr>
+      <th>clear_environment</th>
+      <td><p>When <code>TRUE</code>, will remove objects not named in <code>...</code></p></td>
+    </tr>
+    <tr>
+      <th>keep</th>
+      <td><p>a regular expression of objects to keep when <code>clear_environment = TRUE</code></p></td>
     </tr>
     </table>
 
@@ -173,15 +173,14 @@
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span>()) {
+  <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"shinyobjects"</span>, <span class='st'>"Rmd/test_dashboard.Rmd"</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'>load_reactive_objects</span>()
 
-<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"shinyobjects"</span>, <span class='st'>"Rmd/test_dashboard.Rmd"</span>) <span class='kw'>%&gt;%</span>
- <span class='fu'>load_reactive_objects</span>()
+  <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"shinyobjects"</span>, <span class='st'>"Rmd/test_dashboard_no_inputs.Rmd"</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'>load_reactive_objects</span>()
 
-<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"shinyobjects"</span>, <span class='st'>"Rmd/test_dashboard_no_inputs.Rmd"</span>) <span class='kw'>%&gt;%</span>
- <span class='fu'>load_reactive_objects</span>()
-
-<span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"shinyobjects"</span>, <span class='st'>"Rmd/test_dashboard_missing_inputs.Rmd"</span>) <span class='kw'>%&gt;%</span>
- <span class='fu'>load_reactive_objects</span>()
+  <span class='fu'><a href='https://rdrr.io/r/base/system.file.html'>system.file</a></span>(<span class='kw'>package</span> <span class='kw'>=</span> <span class='st'>"shinyobjects"</span>, <span class='st'>"Rmd/test_dashboard_missing_inputs.Rmd"</span>) <span class='kw'>%&gt;%</span>
+    <span class='fu'>load_reactive_objects</span>()
 }</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">

@@ -4,7 +4,7 @@
 \alias{convert_selection}
 \title{Convert and load the highlighted assignment to your environment}
 \usage{
-convert_selection(envir = .GlobalEnv)
+convert_selection(envir = NULL)
 }
 \arguments{
 \item{envir}{the environment shinyobjects should the load the objects into.}
