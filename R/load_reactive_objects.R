@@ -31,9 +31,27 @@ load_reactive_objects <- function(file,
                                   clear_environment = FALSE,
                                   restart = FALSE,
                                   keep = NULL, 
-                                  envir = globalenv()) {
+                                  envir = NULL) {
 
   stopifnot(interactive())
+  
+  # confirm environment
+  if (missing(envir)) {
+    res <-
+      menu(
+        choices = c("Global", "New", "Cancel"),
+        title = "WARNING: Which environment do you want to use?"
+      )
+    
+    envir <-
+      switch(
+        res,
+        "1" = .GlobalEnv,
+        "2" = new.env(),
+        "3" = stop("Canceled", call. = FALSE)
+      )
+    
+  }
   
   # select file if not provided
   file_to_parse <- which_file(file)
@@ -43,15 +61,7 @@ load_reactive_objects <- function(file,
 
   # make sure demo inputs exist (if required)
   validate_inputs(file_to_parse)
-  
-  # confirm to continue
-  confirm <-   menu(
-    choices = c("Yes", "No"),
-    title = "WARNING: This next step will load all object assignments into your environment.\nDo you want to continue?"
-  )
-  
 
-  if (confirm == 1) {
     if (restart) {
       rstudioapi::restartSession()
     }
@@ -105,5 +115,4 @@ load_reactive_objects <- function(file,
         eval_code(parsed_code[i], envir = envir)
       }
     }
-  }
 }
