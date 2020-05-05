@@ -48,7 +48,7 @@ char_between <- function(text, pattern = c("c", "p")) {
 #' @examples 
 #' if (interactive()) {
 #' breakout_server_code(file = "inst/shiny/server.R") %>% 
-#'   eval(envir = .GlobalEnv)
+#' substr(1, 30)
 #' }
 breakout_server_code <- function(file) {
   raw_code <- as.character(parse(file))

@@ -289,10 +289,16 @@ validate_inputs <- function(file) {
 #' @noRd
 #' @examples
 #' if (interactive()) {
-#' df <- iris
-#' df2 <- iris
-#' my_df <- iris
-#' remove_objects(keep = "^df")
+#' e <- new.env()
+#' list2env(
+#'   list(
+#'     df = iris,
+#'     df2 = iris,
+#'     x = runif(10)
+#'   ),
+#'   envir = e
+#' )
+#' remove_objects(keep = "^df", envir = e)
 #' }
 remove_objects <- function(keep = NULL, envir = NULL) {
   
