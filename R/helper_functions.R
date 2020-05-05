@@ -294,9 +294,9 @@ validate_inputs <- function(file) {
 #' my_df <- iris
 #' remove_objects(keep = "^df")
 #' }
-remove_objects <- function(keep = NULL) {
+remove_objects <- function(keep = NULL, envir = NULL) {
   
-  all_objects <- ls(envir = .GlobalEnv)
+  all_objects <- ls(envir = envir)
   base_regex <- "temp_|final_code"
   
   final_regex <- 
@@ -348,7 +348,7 @@ remove_objects <- function(keep = NULL) {
       final_result
       
     } else if (confirm == 1){
-      rm(list = remove_objects, envir = .GlobalEnv)
+      rm(list = remove_objects, envir = envir)
       final_result <- "cleared"
       
     } else if (confirm == 2) {
@@ -361,7 +361,7 @@ remove_objects <- function(keep = NULL) {
 }
 
 
-eval_code <- function(x, envir = .GlobalEnv) {
+eval_code <- function(x, envir = NULL) {
   as_char_x <- as.character(x)
   
   tryCatch(
