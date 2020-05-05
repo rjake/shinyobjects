@@ -49,6 +49,8 @@ load_reactive_objects <- function(file,
       )
   }
 
+  stopifnot(interactive())
+  
   # select file if not provided
   file_to_parse <- which_file(file)
 
