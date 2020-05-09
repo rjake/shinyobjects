@@ -30,17 +30,17 @@ test_that("assignments can be = or <-", {
 })
 
 
-test_that("find_all_assignments_r", {
+test_that("find all assignments r", {
   assignments <- 
-    breakout_server_code("demo_r_file_server.R") %>% 
+    breakout_server_code("demo-r-server-some-inputs.R") %>% 
     find_all_assignments_r()
   
   expect_equal(length(assignments), 2)
 })
 
 
-test_that("find_all_assignments_rmd", {
-  assignments <- find_all_assignments_rmd("demo_rmd_file.Rmd")
+test_that("find all assignments rmd", {
+  assignments <- find_all_assignments_rmd("demo-rmd-full.Rmd")
   expect_equal(length(assignments), 2)
 })
 
@@ -59,10 +59,15 @@ test_that("code_to_df", {
 })
 
 
-test_that("find_input_code", {
-  inputs <- find_input_code("demo_rmd_file.Rmd")
+test_that("find input code", {
+  inputs_rmd <- find_input_code("demo-rmd-full.Rmd")
+  inputs_r_runapp <- find_input_code("demo-r-runapp-full.R")
+  inputs_r_server <- find_input_code("demo-r-server-full.R")
+  
   expect_equal(
-    inputs, 
+    inputs_rmd,
+    inputs_r_runapp,
+    inputs_r_server,
     "input <- list(x = 1, y = 2)"
   )
 })
