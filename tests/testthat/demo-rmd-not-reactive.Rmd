@@ -1,0 +1,13 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r}
+a <- 1
+a
+
+b = 2
+b
+```
+

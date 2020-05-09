@@ -1,0 +1,15 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r, input_demo, eval = FALSE}
+input <-
+  list(x = 1)
+```
+
+```{r}
+renderText(input$x)
+renderText(input$y)
+```
+

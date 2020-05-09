@@ -18,3 +18,9 @@ a
 b = 2
 b
 ```
+
+```{r}
+renderText(input$x)
+renderText(input$y)
+```
+
