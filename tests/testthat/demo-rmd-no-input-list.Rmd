@@ -1,0 +1,10 @@
+---
+title: "Untitled"
+output: html_document
+---
+
+```{r}
+renderText(input$x)
+renderText(input$y)
+```
+
