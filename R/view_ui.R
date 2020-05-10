@@ -39,10 +39,12 @@ view_ui <- function(x, close_after = 5) {
   ui <- fluidPage(x)
   
   server <- function(input, output) {
+    # nocov start
     if (!is.null(close_after)) {
       Sys.sleep(close_after)
       stopApp()
     }
+    # nocov end
   }
   
   app <- shinyApp(ui, server)
