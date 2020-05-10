@@ -30,8 +30,10 @@ load_reactive_objects <- function(file,
                                   envir = NULL,
                                   clear_environment = FALSE,
                                   keep = NULL) {
+  # nocov start
   stopifnot(interactive())
-
+  # nocov end
+  
   # confirm environment
   if (missing(envir)) {
     res <-
@@ -48,8 +50,6 @@ load_reactive_objects <- function(file,
         "3" = stop("Canceled", call. = FALSE)
       )
   }
-
-  stopifnot(interactive())
   
   # select file if not provided
   file_to_parse <- which_file(file)
@@ -60,6 +60,7 @@ load_reactive_objects <- function(file,
   # make sure demo inputs exist (if required)
   validate_inputs(file_to_parse)
 
+  # nocov start
   if (restart) {
     rstudioapi::restartSession()
   }
@@ -73,6 +74,7 @@ load_reactive_objects <- function(file,
   } else {
     result <- "proceed"
   }
+  # nocov end
 
   if (result %in% c("cleared", "proceed")) {
     # * load inputs ----
