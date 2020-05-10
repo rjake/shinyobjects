@@ -327,9 +327,9 @@ remove_objects <- function(keep = NULL, envir = NULL) {
         )
       )
       
-      regex_phrase <- glue('editing this regex pattern: "{keep}"')
+      regex_phrase <- glue('update this argument: keep = "{keep}"')
     } else {
-      regex_phrase <- 'using the (keep = "") argument'
+      regex_phrase <- 'specify objects using the (keep = "") argument'
     }
     
     # confirm selections
@@ -340,17 +340,11 @@ remove_objects <- function(keep = NULL, envir = NULL) {
       )
     
     # clear environment if enter is used
-    if (confirm == 0) {
-      final_result <- glue("Function ended because 0 was selected")
-      final_result
-      
-    } else if (confirm == 1){
+    if (confirm == 1) {
       rm(list = remove_objects, envir = envir)
       final_result <- "cleared"
-      
-    } else if (confirm == 2) {
-      final_result <- glue("Please update the function by {regex_phrase}")
-      
+    } else {
+      final_result <- glue('Please {regex_phrase}')
     }
     
     final_result
