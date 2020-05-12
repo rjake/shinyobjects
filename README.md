@@ -3,6 +3,15 @@
 
 # shinyobjects <img src="man/figures/logo.png" align="right" alt="" width="120" />
 
+<!-- [![Codecov test coverage](https://codecov.io/gh/rjake/simplecolors/branch/master/graph/badge.svg)](https://codecov.io/gh/rjake/simplecolors?branch=master)-->
+
+<!-- badges: start -->
+
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/shinyobjects)](https://cran.r-project.org/package=shinyobjects)
+[![CRAN
+Downloads](https://cranlogs.r-pkg.org/badges/grand-total/shinyobjects)](https://cran.r-project.org/package=shinyobjects)
+<!-- badges: end -->
+
 Troubleshooting reactive data in a `shiny` app or `flexdashboard` can be
 difficult. The goal of this package is to access reactive objects in
 your local environment. This allows you to debug your code without
@@ -20,20 +29,17 @@ viewer pane (see below).
 
 ## Installation
 
-<!--  
-  You can install the released version of `shinyobjects` from [CRAN](https://CRAN.R-project.org) with:
-  
-  ``` r
-  install.packages("shinyobjects")
-  ```
+You can install the released version of `shinyobjects` from
+[CRAN](https://cran.r-project.org/package=shinyobjects) with:
 
--->
+``` r
+install.packages("shinyobjects")
+```
 
 You can install the development version from
 [GitHub](https://github.com/rjake/shinyobjects) with:
 
 ``` r
-# install.packages("devtools")
 devtools::install_github("rjake/shinyobjects")
 ```
 
