@@ -17,12 +17,13 @@ test_that("uses provided environment - Rmd", {
 
 
 
-test_that("uses global environment", {
-  stub(load_reactive_objects, "interactive", TRUE)
-  stub(load_reactive_objects, "menu", 1)
-  load_reactive_objects(file = "demo-r-runapp-full.R")
-  expect_true(length(ls(.GlobalEnv)) == 5)
-})
+# test_that("uses global environment", {
+#   stub(load_reactive_objects, "interactive", TRUE)
+#   stub(ask_for_environment, "menu", 1, 2)
+#   load_reactive_objects(file = "demo-r-runapp-full.R")
+#   print(length(ls(.GlobalEnv)))
+#   expect_true(length(ls(.GlobalEnv)) == 6)
+# })
 
 
 test_that("uses selected file", {
