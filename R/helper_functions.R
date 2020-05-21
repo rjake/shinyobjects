@@ -367,3 +367,19 @@ eval_code <- function(x, envir = NULL) {
     }
   )
 }
+
+
+ask_for_environment <- function() {
+  res <-
+    menu(
+      choices = c("Global", "New", "Cancel"),
+      title = "WARNING: Which environment do you want to use?"
+    )
+  
+    switch(
+      res,
+      "1" = .GlobalEnv,
+      "2" = new.env(),
+      "3" = stop("Canceled", call. = FALSE)
+    )
+}
