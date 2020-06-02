@@ -1,9 +1,10 @@
 #' Show UI output in viewer pane
 #'
-#' @param x ui content (actionButton, selectInput, valueBox), defaults to last output, expects an object with class "shiny.tag"
+#' @param x ui content (actionButton, selectInput, valueBox), if x is not provided, \code{view_ui()} will look for selected text in the source pane or the last output from running the UI code. In the latter case, it expects an object with class "shiny.tag" or "shiny.tag.list"
 #' @param close_after number of seconds to display UI in Viewer panel. If NULL, app must be stopped manually before more code can be run.
 #' @importFrom shiny shinyApp fluidPage runApp stopApp
-#' @importFrom rstudioapi viewer
+#' @importFrom rstudioapi viewer getSourceEditorContext
+#' @importFrom utils menu
 #' @export
 #' @examples 
 #' if (interactive()) {
@@ -21,11 +22,21 @@
 #' view_ui(close_after = 6)
 #' }
 #' 
-
 view_ui <- function(x, close_after = 5) {
   # nocov start
   if (missing(x)) {
-    x <- .Last.value
+    selected_text <- rstudioapi::getSourceEditorContext()$selection[[1]]$text
+    if (nchar(selected_text) > 1) {
+      res <- 
+        menu(
+          choices = c("Yes", "No"), 
+          title = "Do you want to use the selected text from the source pane?"
+        )
+      if (res == 1) x <- eval(parse(text = selected_text))
+      if (res == 2) x <- .Last.value
+    } else {
+      x <- .Last.value 
+    }
   }
   # nocov end
   

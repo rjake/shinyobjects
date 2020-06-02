@@ -139,7 +139,7 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>ui content (actionButton, selectInput, valueBox), defaults to last output, expects an object with class "shiny.tag"</p></td>
+      <td><p>ui content (actionButton, selectInput, valueBox), if x is not provided, <code>view_ui()</code> will look for selected text in the source pane or the last output from running the UI code. In the latter case, it expects an object with class "shiny.tag" or "shiny.tag.list"</p></td>
     </tr>
     <tr>
       <th>close_after</th>
