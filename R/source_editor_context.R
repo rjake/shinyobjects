@@ -1,5 +1,3 @@
-# nocov start
-
 #' Convert and load the highlighted assignment to your environment
 #'
 #' After highlighting the assignment in the source editor, go to 
@@ -11,9 +9,11 @@
 #' @importFrom rstudioapi getSourceEditorContext
 #'
 convert_selection <- function(envir = NULL) {
+  if (missing(envir)) {
+    envir <- ask_for_environment()
+  }
+  
   orig_code <- getSourceEditorContext()$selection[[1]]$text
   new_code <- convert_assignments(orig_code)
   eval(parse(text = new_code) , envir = envir)
 }
-
-# nocov end

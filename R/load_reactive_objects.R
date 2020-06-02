@@ -36,19 +36,7 @@ load_reactive_objects <- function(file,
   
   # confirm environment
   if (missing(envir)) {
-    res <-
-      menu(
-        choices = c("Global", "New", "Cancel"),
-        title = "WARNING: Which environment do you want to use?"
-      )
-
-    envir <-
-      switch(
-        res,
-        "1" = .GlobalEnv,
-        "2" = new.env(),
-        "3" = stop("Canceled", call. = FALSE)
-      )
+    envir <- ask_for_environment()
   }
   
   # select file if not provided
