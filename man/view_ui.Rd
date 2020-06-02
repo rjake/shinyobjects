@@ -7,7 +7,7 @@
 view_ui(x, close_after = 5)
 }
 \arguments{
-\item{x}{ui content (actionButton, selectInput, valueBox), defaults to last output, expects an object with class "shiny.tag"}
+\item{x}{ui content (actionButton, selectInput, valueBox), if x is not provided, \code{view_ui()} will look for selected text in the source pane or the last output from running the UI code. In the latter case, it expects an object with class "shiny.tag" or "shiny.tag.list"}
 
 \item{close_after}{number of seconds to display UI in Viewer panel. If NULL, app must be stopped manually before more code can be run.}
 }
