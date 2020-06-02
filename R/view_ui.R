@@ -22,9 +22,9 @@
 #' }
 #' 
 view_ui <- function(x, close_after = 5) {
-  selected_text <- rstudioapi::getSourceEditorContext()$selection[[1]]$text
   # nocov start
   if (missing(x)) {
+    selected_text <- rstudioapi::getSourceEditorContext()$selection[[1]]$text
     if (nchar(selected_text) > 1) {
       res <- 
         menu(
