@@ -298,6 +298,7 @@ validate_inputs <- function(file) {
       }
     }
   }
+  input_code
 }
 
 
