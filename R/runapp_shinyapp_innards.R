@@ -13,9 +13,9 @@ guts <- function(x, fn) {
   return_args <- function(...) {
     (as.list(match.call(expand.dots = T)))
   }
-  
+  return_args
   assign(fn, return_args)
-  
+
   eval(parse(text = x))
 }
 
@@ -25,8 +25,7 @@ guts <- function(x, fn) {
 #' @param x expression from code stored as text
 #' @noRd
 deparse_server <- function(x) {
-  x %>% 
-    deparse() %>% 
+  parse(text = x) %>% 
     trimws() %>% 
     find_all_assignments_r()
 }
@@ -36,10 +35,14 @@ deparse_server <- function(x) {
 #' 
 #' @param x expression containing runApp(...) 
 #' @noRd
-inside_runapp <- function(x){
-  sub("runApp\\(shinyApp", "runApp(list", x) %>% 
-    guts("runApp") %>% 
-    guts("list")
+#' @importFrom purrr pluck
+inside_runapp <- function(code) {
+  sub("runApp\\(shinyApp", "runApp(list", code) %>%
+    guts("runApp") %>%
+    guts("list") %>%
+    pluck("server") %>%
+    paste(collapse = "\n") %>%
+    parse_nested()
 }
 
 #' Pulls the calls out of shinyApp
@@ -47,7 +50,8 @@ inside_runapp <- function(x){
 #' @param x expression containing runApp(...) 
 #' @noRd
 inside_shinyapp <- function(x){
-  guts(x, "shinyApp")
+  guts(x, "shinyApp") %>% 
+    pluck("server")
 }
 
 
@@ -61,12 +65,13 @@ extract_from_app_fn <- function(text) {
   
   if (!grepl("server", code)) {
     warning("server not listed", call. = FALSE)
-    inside_code <- list(server = "")
+    inside_code <- ""
   } else if (grepl("^runApp.*server =", code)) {
     inside_code <- inside_runapp(code)
   } else if (grepl("shinyApp.*server =", code)) {
     inside_code <- inside_shinyapp(code)
   } 
   
-  deparse_server(inside_code$server)
+  deparse_server(inside_code)
 }
+#extract_from_app_fn(server_code)
