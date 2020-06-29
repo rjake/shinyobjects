@@ -3,7 +3,7 @@ library(mockery)
 test_that("uses provided environment - R", {
   e <- new.env()
   stub(load_reactive_objects, "interactive", TRUE)
-  load_reactive_objects(file = "demo-r-runapp-full.R", envir = e)
+  load_reactive_objects(file = "demo-r-runapp-list.R", envir = e)
   expect_true(length(ls(e)) == 5)
 })
 
@@ -29,7 +29,7 @@ test_that("uses provided environment - Rmd", {
 test_that("uses selected file", {
   e <- new.env()
   stub(load_reactive_objects, "interactive", TRUE)
-  stub(load_reactive_objects, "which_file", "demo-r-runapp-full.R")
+  stub(load_reactive_objects, "which_file", "demo-r-runapp-list.R")
   load_reactive_objects(envir = e)
   expect_true(length(ls(e)) == 5)
 })
@@ -41,7 +41,7 @@ test_that("clears environment", {
   stub(load_reactive_objects, "interactive", TRUE)
   stub(remove_objects, "menu", 1)
   load_reactive_objects(
-    file = "demo-r-runapp-full.R",
+    file = "demo-r-runapp-list.R",
     clear_environment = F,
     keep = "x",
     envir = e

@@ -43,6 +43,37 @@ strings_to_find <- function() {
   paste0("^(library|", valid_assignments(), " (<-|=[^=]))")
 }
 
+#' Find code between brackets: (), {}, []
+#' parse_nested("test <- function() {\n x1 x2 <- function() {\n123\n}\n \n x3}\n ...")
+#' @noRd
+#' @importFrom stringr str_remove str_extract
+#' @importFrom purrr pluck
+parse_nested <- function(x, start = "\\{", end = "\\}",  prefix = "") {
+  
+  search_x <- str_remove(x, paste0(".*", prefix))
+  
+  regex_pattern <-
+    paste0(
+      start,
+      "(?>[^",
+      start,
+      end,
+      "]|(?R))*",
+      end
+    )
+  
+  x_match <- 
+    gregexpr(pattern = regex_pattern, search_x, perl = TRUE) %>% 
+    pluck(1)
+  
+  x_start <- nchar(str_extract(x, start))
+  
+  substring(
+    search_x, 
+    x_match + x_start, 
+    x_match + attr(x_match, "match.length") - 2
+  )
+}
 
 #' Find all libraries and assignments for R files
 #'

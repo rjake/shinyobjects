@@ -5,7 +5,7 @@ output: html_document
 
 ```{r, input_demo, eval = FALSE}
 input <-
-  list(x = 1)
+  list(x = 10)
 ```
 
 ```{r}
