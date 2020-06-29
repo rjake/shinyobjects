@@ -50,9 +50,10 @@ test_that("no prompt for input list because it already exists", {
 
 
 test_that("no prompt for input list because not reactive", {
-  expect_null(
+  expect_message(
     capture_message(
       validate_inputs("demo-rmd-not-reactive.Rmd")
-    )
+    ),
+    regexp = NA
   )
 })
