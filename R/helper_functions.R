@@ -155,7 +155,7 @@ find_input_code <- function(file){
   } else {# if an Rmd, convert eval = F statement to T to see if "input <-" exists
     replace_evals <-
       read_file(file) %>%
-      str_replace_all("eval = F(ALSE)?", "eval = TRUE")
+      str_replace_all("eval( )?=( )?F(ALSE)?", "eval = TRUE")
     
     output = tempfile()
     # create R doc from Rmd
