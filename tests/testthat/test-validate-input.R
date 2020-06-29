@@ -34,15 +34,17 @@ test_that("prompts to update input list", {
 
 
 test_that("no prompt for input list because it already exists", {
-  expect_null(
+  expect_message(
     capture_message(
       validate_inputs("demo-r-runapp-list.R")
-    )
+    ),
+    regexp = NA
   )
-  expect_null(
+  expect_message(
     capture_message(
       validate_inputs("demo-rmd-full.Rmd")
-    )
+    ),
+    regexp = NA
   )
 })
 
