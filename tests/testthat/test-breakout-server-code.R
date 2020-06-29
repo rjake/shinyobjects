@@ -20,7 +20,7 @@ test_that("use everything when missing server <- ", {
 })
 
 test_that("", {
-  assignments <- breakout_server_code("demo-r-runapp-full.R")
+  assignments <- breakout_server_code("demo-r-runapp-list.R")
   expect_equal(length(assignments), 3)
 })
 
@@ -34,7 +34,7 @@ test_that("warning if missing server <- ", {
     breakout_server_code(file = tmp) %>% 
     gsub("\\s{2,}", " ", .) 
   unlink(tmp)
-
+  
   expect_equal(actual, expected)
 })
 

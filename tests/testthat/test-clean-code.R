@@ -54,14 +54,14 @@ test_that("code_to_df", {
       raw = x,
       code = "a <- function() (x)"
     )
-
+  
   expect_equal(actual, expected)
 })
 
 
 test_that("find input code", {
   inputs_rmd <- find_input_code("demo-rmd-full.Rmd")
-  inputs_r_runapp <- find_input_code("demo-r-runapp-full.R")
+  inputs_r_runapp <- find_input_code("demo-r-runapp-list.R")
   inputs_r_server <- find_input_code("demo-r-server-full.R")
   
   expect_equal(

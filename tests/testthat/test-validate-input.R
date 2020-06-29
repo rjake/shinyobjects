@@ -35,7 +35,7 @@ test_that("prompts to update input list", {
 
 test_that("no prompt for input list because it already exists", {
   expect_invisible(
-    validate_inputs("demo-r-runapp-full.R")
+    validate_inputs("demo-r-runapp-list.R")
   )
   
   expect_invisible(
