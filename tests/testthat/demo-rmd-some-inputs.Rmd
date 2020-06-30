@@ -11,5 +11,6 @@ input <-
 ```{r}
 renderText(input$x)
 renderText(input$y)
+a <- reactiveValues(x = input$x)
 ```
 

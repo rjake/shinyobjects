@@ -1,6 +1,13 @@
 library(mockery)
 
-mock_text <- list(selection = list(x = list(text = "x <- reactive(1+1)")))
+mock_text <- list(
+  selection = list(
+    x = list(
+      text = "x <- reactive(1+1)\n
+      y <- reactiveValues(a = 1, b = 2)"
+    )
+  )
+)
 
 test_that("convert_selection uses provided environment - R", {
   e <- new.env()
