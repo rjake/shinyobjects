@@ -11,6 +11,20 @@ test_that("shiny::reactive() and reactive() both work", {
   )        
 })
 
+test <- function() list(
+  a = 1, 
+  b = 2
+)
+
+test_that("shiny::reactiveValues() and reactiveValues() both work", {
+  no_namespace <- "test <- shiny::reactiveValues(a = 1, b = 2)"
+  with_namespace <- "test <- reactiveValues(a = 1, b = 2)"
+  
+  expect_equal(
+    convert_assignments(no_namespace),
+    convert_assignments(with_namespace)
+  )        
+})
 
 test_that("strings_to_find() most recent list", {
   expect_equal(
