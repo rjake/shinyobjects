@@ -46,7 +46,7 @@ load_reactive_objects <- function(file,
   is_rmd <- str_detect(file_to_parse, "[rR]md$")
 
   # make sure demo inputs exist (if required)
-  validate_inputs(file_to_parse)
+  inputs <- validate_inputs(file_to_parse)
 
   # nocov start
   if (restart) {
@@ -65,9 +65,6 @@ load_reactive_objects <- function(file,
   # nocov end
 
   if (result %in% c("cleared", "proceed")) {
-    # * load inputs ----
-    eval(parse(text = find_input_code(file_to_parse)), envir = envir)
-
     # find all libraries and functions ----
 
     if (is_rmd) {
@@ -95,6 +92,12 @@ load_reactive_objects <- function(file,
     parsed_code <- parse(text = text_to_parse)
 
     # create ouput & session lists so assignments don't break
+    if (nchar(inputs) > 0) {
+      eval_code(parse(text = inputs), envir = envir)  
+    } else {
+      assign("input", list(), envir)
+    }
+    
     assign("output", list(), envir)
     assign("session", list(), envir)
 

@@ -34,18 +34,26 @@ test_that("prompts to update input list", {
 
 
 test_that("no prompt for input list because it already exists", {
-  expect_invisible(
-    validate_inputs("demo-r-runapp-list.R")
+  expect_message(
+    capture_message(
+      validate_inputs("demo-r-runapp-list.R")
+    ),
+    regexp = NA
   )
-  
-  expect_invisible(
-    validate_inputs("demo-rmd-full.Rmd")
+  expect_message(
+    capture_message(
+      validate_inputs("demo-rmd-full.Rmd")
+    ),
+    regexp = NA
   )
 })
 
 
 test_that("no prompt for input list because not reactive", {
-  expect_invisible(
-    validate_inputs("demo-rmd-not-reactive.Rmd")
+  expect_message(
+    capture_message(
+      validate_inputs("demo-rmd-not-reactive.Rmd")
+    ),
+    regexp = NA
   )
 })
