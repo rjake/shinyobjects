@@ -108,12 +108,9 @@ find_all_assignments_rmd <- function(file) {
 #' @importFrom stringr str_detect str_replace_all
 #' @noRd
 convert_assignments <- function(x){
-  if (str_detect(x, "\\w+ <- .*reactive\\(")) {
-    x <- x %>%
-      str_replace_all("(shiny::)?reactive\\(", "function() (")
-  }
-
-  return(x)
+  x %>%
+    str_replace_all("\\b(shiny::)?reactive\\(", "function() (") %>%
+    str_replace_all("\\b(shiny::)?reactiveValues\\(", "list(")
 }
 
 
