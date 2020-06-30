@@ -94,8 +94,6 @@ load_reactive_objects <- function(file,
     # create ouput & session lists so assignments don't break
     if (nchar(inputs) > 0) {
       eval_code(parse(text = inputs), envir = envir)  
-    } else {
-      assign("input", list(), envir)
     }
     
     assign("output", list(), envir)
