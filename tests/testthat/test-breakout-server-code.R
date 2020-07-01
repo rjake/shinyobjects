@@ -32,7 +32,8 @@ test_that("warning if missing server <- ", {
   write(code, tmp)
   actual <- 
     breakout_server_code(file = tmp) %>% 
-    gsub("\\s{2,}", " ", .) 
+    gsub(pattern = "\\s{2,}", replacement = " ") %>% 
+    trimws()
   unlink(tmp)
   
   expect_equal(actual, expected)

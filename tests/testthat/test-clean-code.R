@@ -11,10 +11,6 @@ test_that("shiny::reactive() and reactive() both work", {
   )        
 })
 
-test <- function() list(
-  a = 1, 
-  b = 2
-)
 
 test_that("shiny::reactiveValues() and reactiveValues() both work", {
   no_namespace <- "test <- shiny::reactiveValues(a = 1, b = 2)"
@@ -25,6 +21,7 @@ test_that("shiny::reactiveValues() and reactiveValues() both work", {
     convert_assignments(with_namespace)
   )        
 })
+
 
 test_that("strings_to_find() most recent list", {
   expect_equal(
@@ -49,7 +46,7 @@ test_that("find all assignments r", {
     breakout_server_code("demo-r-server-some-inputs.R") %>% 
     find_all_assignments_r()
   
-  expect_equal(length(assignments), 2)
+  expect_equal(length(assignments), 3)
 })
 
 
