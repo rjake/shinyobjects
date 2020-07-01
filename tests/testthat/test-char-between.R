@@ -1,7 +1,12 @@
-test_that("stop if 'c' or 'p' not given as argument", {
-  expect_error(char_between("{.}", ""))
+test_that("extract from curly braces", {
+  actual <- code_between("test {x {y}}", "c")
+  expected <- "x {y}"
+  expect_equal(actual, expected)
 })
 
-test_that("warn pattern is missing", {
-  expect_warning(char_between("{.}"))
+
+test_that("extract from parentheses", {
+  actual <- code_between("test {x (y)}", "p")
+  expected <- "y"
+  expect_equal(actual, expected)
 })

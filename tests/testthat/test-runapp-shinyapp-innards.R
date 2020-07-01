@@ -32,8 +32,8 @@ test_that("assingments found", {
   )
 })
 
-test_that("warning if no server listed", {
-  expect_warning(
+test_that("message if no server listed", {
+  expect_message(
     extract_from_app_fn("1+1"),
     "server not listed"
   )
