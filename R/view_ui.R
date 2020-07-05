@@ -41,9 +41,11 @@ view_ui <- function(x, close_after = 5) {
   # nocov end
   
   if (!class(x)[1] %in% c("shiny.tag", "shiny.tag.list")) {
-    stop(
-      'expected an object of class "shiny.tag" or "shiny.tag.list"',
-      call. = FALSE
+    message(
+      paste(
+        'if output is not what you expected, view_ui() expects',
+        '"shiny.tag" or "shiny.tag.list"'
+      )
     )
   }
   
