@@ -1,10 +1,24 @@
 library(shiny)
 library(mockery)
 
-test_that("error if not shiny.tag", {
+test_that("message if not shiny.tag", {
+  run_app_mock <- mock()
+  
+  stub(
+    where = view_ui,
+    what = "shinyApp",
+    how = "test app"
+  )
+  
+  stub(
+    where = view_ui,
+    what = "runApp",
+    how = run_app_mock
+  )
+
   x <- ""
   
-  expect_error(view_ui(x))
+  expect_message(view_ui(x))
 })
 
 
