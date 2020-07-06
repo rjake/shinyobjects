@@ -15,22 +15,21 @@ test_that("output list renderText", {
 })
 
 
+if (interactive()) {
+  test_that("output list renderPlot", {
+    e <- new.env()
+    e$output <- list()
+    
+    x <- expression(output$plot <- renderPlot({plot(cars)}))
 
-test_that("output list renderPlot", {
-  e <- new.env()
-  e$output <- list()
-  
-  x <- expression(output$plot <- renderPlot({plot(cars)}))
-  
-  eval(update_expressions(x), envir = e)
-  
-  expect_equal(
-    object = class(e$output$plot), 
-    expected = "recordedplot"
-  )
-})
+    eval(update_expressions(x), envir = e)
 
-
+    expect_equal(
+      object = class(e$output$plot),
+      expected = "recordedplot"
+    )
+  })
+}
 
 test_that("output list renderTable", {
   e <- new.env()
