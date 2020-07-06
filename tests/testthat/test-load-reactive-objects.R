@@ -4,7 +4,7 @@ test_that("uses provided environment - R", {
   e <- new.env()
   stub(load_reactive_objects, "interactive", TRUE)
   load_reactive_objects(file = "demo-r-runapp-list.R", envir = e)
-  expect_true(length(ls(e)) == 5)
+  expect_true(length(ls(e)) == 6)
 })
 
 
@@ -12,7 +12,7 @@ test_that("uses provided environment - Rmd", {
   e <- new.env()
   stub(load_reactive_objects, "interactive", TRUE)
   load_reactive_objects(file = "demo-rmd-full.Rmd", envir = e)
-  expect_true(length(ls(e)) == 5)
+  expect_true(length(ls(e)) == 7)
 })
 
 
@@ -31,7 +31,7 @@ test_that("uses selected file", {
   stub(load_reactive_objects, "interactive", TRUE)
   stub(load_reactive_objects, "which_file", "demo-r-runapp-list.R")
   load_reactive_objects(envir = e)
-  expect_true(length(ls(e)) == 5)
+  expect_true(length(ls(e)) == 6)
 })
 
 
@@ -46,5 +46,5 @@ test_that("clears environment", {
     keep = "x",
     envir = e
   )
-  expect_true(length(ls(e)) == 8)
+  expect_true(length(ls(e)) == 9)
 })

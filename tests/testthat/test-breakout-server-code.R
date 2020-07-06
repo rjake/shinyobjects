@@ -9,33 +9,25 @@ test_that("stop if multiple server <- ", {
 
 test_that("use everything when missing server <- ", {
   code <- "a <- 1; b <- 2;"
-  expected <- c("a <- 1", "b <- 2")
+  expected <- parse(text = "a <- 1; b <- 2")
 
   tmp <- tempfile("data")
   write(code, tmp)
   actual <- breakout_server_code(file = tmp)
   unlink(tmp)
   
-  expect_equal(expected, actual)
+  expect_equal(
+    deparse(expected), 
+    deparse(actual)
+  )
 })
 
-test_that("", {
-  assignments <- breakout_server_code("demo-r-runapp-list.R")
-  expect_equal(length(assignments), 3)
-})
-
-test_that("warning if missing server <- ", {
-  code <- "x <- 1; server <- function() {y <- reactive({1})}; z <- x;"
-  expected <- c("x <- 1", "y <- function() ({ 1 })", "z <- x")
+test_that("finds all assignments", {
+  assignments <- 
+    breakout_server_code("demo-r-runapp-list.R") %>%
+    find_all_assignments_r() %>%
+    convert_assignments()
   
-  tmp <- tempfile("data")
-  write(code, tmp)
-  actual <- 
-    breakout_server_code(file = tmp) %>% 
-    gsub(pattern = "\\s{2,}", replacement = " ") %>% 
-    trimws()
-  unlink(tmp)
-  
-  expect_equal(actual, expected)
+  expect_equal(length(assignments), 5)
 })
 
