@@ -82,7 +82,9 @@ load_reactive_objects <- function(file,
     
     # add library(shiny) if not included
     if (!any(grepl("library\\(shiny\\)", final_code))) {
-      final_code <- append(final_code, expression(library(shiny)))
+      if (requireNamespace("shiny", quietly = TRUE)) {
+        final_code <- append(final_code, expression(library(shiny)))
+      }
     }
 
 
