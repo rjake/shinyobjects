@@ -1,5 +1,3 @@
-library(highcharter)
-
 test_that("output list renderText", {
   e <- new.env()
   e$output <- list()
@@ -41,25 +39,6 @@ test_that("output list renderTable", {
   expect_equal(
     object = class(e$output$table), 
     expected = "data.frame"
-  )
-})
-
-
-
-test_that("output list renderHighcharter", {
-  e <- new.env()
-  e$output <- list()
-  
-  x <- 
-    expression(
-      output$hc <- 
-        renderHighchart({invisible(highcharts_demo())})
-    )
-  eval(update_expressions(x), envir = e)
-  
-  expect_equal(
-    object = class(e$output$hc)[1], 
-    expected = "highchart"
   )
 })
 
