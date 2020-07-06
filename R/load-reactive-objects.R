@@ -79,15 +79,7 @@ load_reactive_objects <- function(file,
     }
     
     final_code <- convert_assignments(code_to_use)
-    
-    # add library(shiny) if not included
-    if (!any(grepl("library\\(shiny\\)", final_code))) {
-      if (requireNamespace("shiny", quietly = TRUE)) {
-        final_code <- append(final_code, expression(library(shiny)))
-      }
-    }
-
-
+  
     # create ouput & session lists so assignments don't break
     if (nchar(inputs) > 0) {
       eval_code(parse(text = inputs), envir = envir)  
