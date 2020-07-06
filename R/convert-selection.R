@@ -14,6 +14,6 @@ convert_selection <- function(envir = NULL) {
   }
   
   orig_code <- getSourceEditorContext()$selection[[1]]$text
-  new_code <- convert_assignments(orig_code)
+  new_code <- convert_assignments(parse(text = orig_code))
   eval(parse(text = new_code) , envir = envir)
 }

@@ -4,6 +4,12 @@ output: html_document
 ---
 
 ```{r}
+library(shiny)
+
+my_df <- reactive({head(cars, input$x)})
+
+about_df <- reactiveValues(n_obs = nrow(my_df()), len = length(my_df()))
+
 renderText(input$x)
 renderText(input$y)
 ```

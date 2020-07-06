@@ -49,7 +49,7 @@ find_input_code <- function(file){
 #' @importFrom stringr str_extract_all str_remove
 #' @importFrom readr read_lines
 #' @importFrom tibble tibble
-#' @importFrom dplyr mutate row_number filter distinct group_by summarise n
+#' @importFrom dplyr mutate row_number filter distinct group_by summarise n ungroup
 #' @importFrom tidyr unnest
 #' @importFrom glue glue glue_collapse
 #' @noRd

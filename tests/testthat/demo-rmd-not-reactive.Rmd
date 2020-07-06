@@ -4,6 +4,7 @@ output: html_document
 ---
 
 ```{r}
+library(shiny)
 a <- 1
 a
 
