@@ -47,6 +47,18 @@ update_expressions <- function(x){
     code_as_call[[3]][[1]] <- as.symbol("list")
     
     final_code <- as.expression(code_as_call)
+  } else if (grepl("output\\$", as.character(x))) {
+    code_as_call <- as.call(x)[[1]] 
+    get_symbol <- code_as_call[[2]] 
+    get_formals <- code_as_call[[3]][[2]]
+    new_exp <-
+      as.expression(
+        bquote(
+          .(get_symbol) <- (.(get_formals))
+        )
+      )
+    
+    final_code <- new_exp
   } else {
     final_code <- x
   }
