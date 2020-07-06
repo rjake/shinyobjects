@@ -32,7 +32,7 @@ find_all_assignments_rmd <- function(file) {
 update_expressions <- function(x){
   char_code <- as.character(x)
   
-  if (!grepl("<-", char_code)) {
+  if (!grepl("<-.*\\(", char_code)) {
     final_code <- x
   } else {
     code_as_call <- as.call(x)[[1]]
@@ -40,7 +40,7 @@ update_expressions <- function(x){
     get_formals <- code_as_call[[3]][[2]]
     
     
-    if (grepl("reactive\\(", as.character(x))) {
+    if (grepl("reactive\\(", char_code)) {
       get_formals <- code_as_call[[3]][[2]]
       new_exp <-
         as.expression(
@@ -50,11 +50,11 @@ update_expressions <- function(x){
         )
       
       final_code <- new_exp
-    } else if (grepl("reactiveValues\\(", as.character(x))) {
+    } else if (grepl("reactiveValues\\(", char_code)) {
       code_as_call[[3]][[1]] <- as.symbol("list")
       
       final_code <- as.expression(code_as_call)
-    } else if (grepl("output\\$.*renderPlot", as.character(x))) {
+    } else if (grepl("output\\$.*renderPlot", char_code)) {
       new_exp <-
         as.expression(
           bquote(
@@ -72,6 +72,8 @@ update_expressions <- function(x){
         )
       
       final_code <- new_exp
+    } else {
+      final_code <- x
     } 
   }  
   final_code
