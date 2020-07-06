@@ -30,42 +30,52 @@ find_all_assignments_rmd <- function(file) {
 #' @param x code to evaluate
 #' @noRd
 update_expressions <- function(x){
-  if (grepl("reactive\\(", as.character(x))) {
-    code_as_call <- as.call(x)[[1]] 
-    get_symbol <- code_as_call[[2]] 
-    get_formals <- code_as_call[[3]][[2]]
-    new_exp <-
-      as.expression(
-        bquote(
-          .(get_symbol) <- function() .(get_formals)
-        )
-      )
-    
-    final_code <- new_exp
-  } else if (grepl("reactiveValues\\(", as.character(x))) {
-    code_as_call <- as.call(x)[[1]] 
-    code_as_call[[3]][[1]] <- as.symbol("list")
-    
-    final_code <- as.expression(code_as_call)
-  } else if (grepl("output\\$", as.character(x))) {
-    code_as_call <- as.call(x)[[1]] 
-    get_symbol <- code_as_call[[2]] 
-    get_formals <- code_as_call[[3]][[2]]
-    new_exp <-
-      as.expression(
-        bquote(
-          .(get_symbol) <- (.(get_formals))
-        )
-      )
-    
-    final_code <- new_exp
-  } else {
-    final_code <- x
-  }
+  char_code <- as.character(x)
   
+  if (!grepl("<-", char_code)) {
+    final_code <- x
+  } else {
+    code_as_call <- as.call(x)[[1]]
+    get_symbol <- code_as_call[[2]] 
+    get_formals <- code_as_call[[3]][[2]]
+    
+    
+    if (grepl("reactive\\(", as.character(x))) {
+      get_formals <- code_as_call[[3]][[2]]
+      new_exp <-
+        as.expression(
+          bquote(
+            .(get_symbol) <- function() .(get_formals)
+          )
+        )
+      
+      final_code <- new_exp
+    } else if (grepl("reactiveValues\\(", as.character(x))) {
+      code_as_call[[3]][[1]] <- as.symbol("list")
+      
+      final_code <- as.expression(code_as_call)
+    } else if (grepl("output\\$.*renderPlot", as.character(x))) {
+      new_exp <-
+        as.expression(
+          bquote(
+            .(get_symbol) <- recordPlot(.(get_formals))
+          )
+        )
+      
+      final_code <- new_exp
+    } else if (grepl("output\\$", as.character(x))) {
+      new_exp <-
+        as.expression(
+          bquote(
+            .(get_symbol) <- (.(get_formals))
+          )
+        )
+      
+      final_code <- new_exp
+    } 
+  }  
   final_code
 }
-
 
 
 #' Convert reactive dataframes to functions
