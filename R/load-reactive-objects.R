@@ -63,10 +63,10 @@ load_reactive_objects <- function(file,
     result <- "proceed"
   }
   # nocov end
-
+  
   if (result %in% c("cleared", "proceed")) {
     # find all libraries and functions ----
-
+    
     if (is_rmd) {
       # code as tibble (orig + converted functions)
       code_to_use <-
@@ -79,7 +79,7 @@ load_reactive_objects <- function(file,
     }
     
     final_code <- convert_assignments(code_to_use)
-  
+    
     # create ouput & session lists so assignments don't break
     if (nchar(inputs) > 0) {
       eval_code(parse(text = inputs), envir = envir)  
@@ -87,7 +87,7 @@ load_reactive_objects <- function(file,
     
     assign("output", list(), envir)
     assign("session", list(), envir)
-
+    
     # final evaluation
     for (i in seq_along(final_code)) {
       eval_code(final_code[i], envir = envir)

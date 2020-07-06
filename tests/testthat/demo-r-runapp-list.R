@@ -4,9 +4,9 @@ print(getwd())
 # Apps can be run without a server.r and ui.r file
 runApp(
   list(
-  ui = fluidPage(
-    numericInput("x", "# of obs.", 20),
-    plotOutput("plot")
+    ui = fluidPage(
+      numericInput("x", "# of obs.", 20),
+      plotOutput("plot")
   ),
   server = function(input, output) {
     my_df <- reactive({
