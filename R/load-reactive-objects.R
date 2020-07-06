@@ -69,27 +69,22 @@ load_reactive_objects <- function(file,
 
     if (is_rmd) {
       # code as tibble (orig + converted functions)
-      final_code <-
+      code_to_use <-
         find_all_assignments_rmd(file_to_parse)
     } else {
       # parsed code
-      final_code <-
+      code_to_use <-
         breakout_server_code(file_to_parse) %>%
         find_all_assignments_r()
     }
-
-    # parsed code
-    text_to_parse <-
-      code_to_df(final_code)$code
-
+    
+    final_code <- convert_assignments(code_to_use)
+    
     # add library(shiny) if not included
-    if (max(grepl("library\\(shiny\\)", text_to_parse)) == 0) {
-      text_to_parse <-
-        c("library(shiny)", text_to_parse)
+    if (!any(grepl("library\\(shiny\\)", final_code))) {
+      final_code <- append(final_code, expression(library(shiny)))
     }
 
-    # list of expressions
-    parsed_code <- parse(text = text_to_parse)
 
     # create ouput & session lists so assignments don't break
     if (nchar(inputs) > 0) {
@@ -100,8 +95,8 @@ load_reactive_objects <- function(file,
     assign("session", list(), envir)
 
     # final evaluation
-    for (i in seq_along(parsed_code)) {
-      eval_code(parsed_code[i], envir = envir)
+    for (i in seq_along(final_code)) {
+      eval_code(final_code[i], envir = envir)
     }
   }
 }
