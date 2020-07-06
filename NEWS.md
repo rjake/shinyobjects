@@ -1,5 +1,5 @@
 # shinyobjects dev
-### New features
+### New Features
 * `output$plot <- renderPlot(plot(x))` transformed to `output$plot <- (plot(x))` (#45)
 * `reactiveValues()` now converted to `list()` (#29)
 ### Bug fixes
