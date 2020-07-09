@@ -88,7 +88,12 @@
 <!-- [![Codecov test coverage](https://codecov.io/gh/rjake/simplecolors/branch/master/graph/badge.svg)](https://codecov.io/gh/rjake/simplecolors?branch=master)-->
 <!-- badges: start -->
 
-<p>Troubleshooting reactive data in a <code>shiny</code> app or <code>flexdashboard</code> can be difficult. The goal of this package is to access reactive objects in your local environment. This allows you to debug your code without having to actually run the app. It is my hope that this will save you time and allow you to iterate more quickly. The package converts reactive data frames into functions that will read from your raw data and become available in your environment. The main function will also recommended that you create a dummy <code>input</code> list in your script to simulate the reactive inputs. When you run the main function, <code><a href="reference/load_reactive_objects.html">load_reactive_objects()</a></code>, it will prepopulate this list. You can learn more about dummy input lists in <a href="https://rjake.github.io/shinyobjects/articles/tips-and-tricks.html">this vignette</a>. The package also includes a function to view your UI elements in the viewer pane (see below).</p>
+<p>Troubleshooting reactive data in a <code>shiny</code> app or <code>flexdashboard</code> can be difficult. The goal of this package is to access reactive objects in your local environment. This allows you to debug your code without having to run the app. It is my hope that this will save you time and allow you to iterate more quickly.</p>
+<div id="how-does-it-work" class="section level3">
+<h3 class="hasAnchor">
+<a href="#how-does-it-work" class="anchor"></a>How does it work?</h3>
+<p>The package converts reactive data frames into functions that will read from your raw data and become available in your environment. The main function, <code><a href="reference/load_reactive_objects.html">load_reactive_objects()</a></code>, will recommended that you create a dummy <code>input</code> list in your script to simulate reactive inputs. When you run <code><a href="reference/load_reactive_objects.html">load_reactive_objects()</a></code>, it will prepopulate this list. You can learn more about dummy input lists in <a href="https://rjake.github.io/shinyobjects/articles/tips-and-tricks.html">this vignette</a>. The package also includes a function to view your UI elements in the viewer pane (see below).</p>
+</div>
 <div id="installation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
@@ -100,14 +105,14 @@
 <div id="usage" class="section level2">
 <h2 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h2>
-<p>There is a dummy flexdashboard available when the package is installed for you to see how this works.</p>
+<p>The main function of <code>shinyobjects</code> is <code><a href="reference/load_reactive_objects.html">load_reactive_objects()</a></code>. It is similar to running <code><a href="https://rdrr.io/r/base/source.html">source()</a></code> but with a lot of helpers to give you access to the reactive data. When you run it, your environment will have all your libraries, raw data and assignments, dummy <code>input</code>, <code>output</code> and <code>session</code> lists, and all <code>reactive()</code> assignments will be converted to functions. In the dev version (for 0.2.0), you also get access to your <code>render...()</code> objects in the dummy <code>output</code> list. With the dummy <code>input</code> list and the conversion of <code>reactive(x)</code> to <code>function() x</code>, the code will run your data manipulation referencing your dummy <code>input</code> list and it will be like writing a normal script. Note: <strong>shinyobjects does not change your files</strong>; the manipulation happens behind the scenes.</p>
+<p><img src="reference/figures/load_reactive_objects.png" width="600/"></p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(shinyobjects)</a>
 <a class="sourceLine" id="cb3-2" title="2"></a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="co"># If the app is open, you can just run load_reactive_objects()</span></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="co"># The function will detect the app that is currently open</span></a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="kw"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="dt">package =</span> <span class="st">"shinyobjects"</span>, <span class="st">"Rmd/test_dashboard_no_inputs.Rmd"</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="st"> </span><span class="kw"><a href="reference/load_reactive_objects.html">load_reactive_objects</a></span>()</a></code></pre></div>
-<p>This will result in the following output</p>
+<a class="sourceLine" id="cb3-3" title="3"><span class="co"># If the app is open, the function will ask to use </span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="co"># the script currently active in the source pane</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="kw"><a href="reference/load_reactive_objects.html">load_reactive_objects</a></span>()</a></code></pre></div>
+<p>This will result in something like the following message</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">Here are the inputs you have listed<span class="op">:</span></a>
 <a class="sourceLine" id="cb4-2" title="2"></a>
 <a class="sourceLine" id="cb4-3" title="3"><span class="st">  </span>input_name  times_used  lines  missing</a>
@@ -115,51 +120,59 @@
 <a class="sourceLine" id="cb4-5" title="5"><span class="dv">2</span>       year           <span class="dv">2</span>  <span class="dv">48</span>,<span class="dv">49</span>     <span class="ot">TRUE</span></a>
 <a class="sourceLine" id="cb4-6" title="6"></a>
 <a class="sourceLine" id="cb4-7" title="7"></a>
-<a class="sourceLine" id="cb4-8" title="8">Add this code chunk to your Rmd<span class="op">:</span></a>
-<a class="sourceLine" id="cb4-9" title="9"><span class="st">```</span><span class="dt">{r input_demo, eval = FALSE}</span></a>
-<a class="sourceLine" id="cb4-10" title="10"><span class="dt">input &lt;- list(</span></a>
-<a class="sourceLine" id="cb4-11" title="11"><span class="dt">  displ = "",</span></a>
-<a class="sourceLine" id="cb4-12" title="12"><span class="dt">  year = ""</span></a>
-<a class="sourceLine" id="cb4-13" title="13"><span class="dt">)</span></a>
-<a class="sourceLine" id="cb4-14" title="14"><span class="st">```</span></a>
-<a class="sourceLine" id="cb4-15" title="15"></a>
-<a class="sourceLine" id="cb4-16" title="16">WARNING<span class="op">:</span><span class="st"> </span>This <span class="cf">next</span> step will load all object assignments into your environment.</a>
-<a class="sourceLine" id="cb4-17" title="17">Do you want to continue? </a>
-<a class="sourceLine" id="cb4-18" title="18"></a>
-<a class="sourceLine" id="cb4-19" title="19"><span class="dv">1</span><span class="op">:</span><span class="st"> </span>Yes</a>
-<a class="sourceLine" id="cb4-20" title="20"><span class="dv">2</span><span class="op">:</span><span class="st"> </span>No</a></code></pre></div>
-<p>Hitting <code>1</code> will then update your environment with all raw data and assignments, your dummy <code>input</code> list, and all reactive objects will be converted to functions. As functions, the code will keep all the data manipulation and reference your dummy <code>input</code> list. Note: <strong>this function does not change your files</strong>; the manipulation happens within the function.</p>
+<a class="sourceLine" id="cb4-8" title="8"><span class="co"># Add this code to your R file:</span></a>
+<a class="sourceLine" id="cb4-9" title="9">dummy_input &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(</a>
+<a class="sourceLine" id="cb4-10" title="10">  <span class="dt">displ =</span> <span class="st">""</span>,</a>
+<a class="sourceLine" id="cb4-11" title="11">  <span class="dt">year =</span> <span class="st">""</span></a>
+<a class="sourceLine" id="cb4-12" title="12">)</a></code></pre></div>
+<p>If you are working on a <code>flexdashboard</code>, you will get a slightly different message to add a code chunk. Note this has <code>eval=FALSE</code> so it only runs when you need it for troubleshooting</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co">#Add this code chunk to your Rmd:</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="st">```</span><span class="dt">{r input_demo, eval = FALSE}")</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="dt">input &lt;- list(</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="dt">  displ = "",</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="dt">  year = ""</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="dt">)</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="st">```</span></a></code></pre></div>
+<p>It will then ask you where to put the objects when it sources the script:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">WARNING<span class="op">:</span><span class="st"> </span>Which environment do you want to use? </a>
+<a class="sourceLine" id="cb6-2" title="2"></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="dv">1</span><span class="op">:</span><span class="st"> </span>Global</a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="dv">2</span><span class="op">:</span><span class="st"> </span>New</a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="dv">3</span><span class="op">:</span><span class="st"> </span>Cancel</a>
+<a class="sourceLine" id="cb6-6" title="6"></a>
+<a class="sourceLine" id="cb6-7" title="7">Selection<span class="op">:</span></a></code></pre></div>
+<p><strong>Be careful here</strong> <code><a href="reference/load_reactive_objects.html">load_reactive_objects()</a></code> will overwrite objects with the same name in your environment.</p>
+<p>Hit <code>1</code> or <code>2</code> to select the environment. You can also specify the environment using the <code>envir = ...</code> argument.</p>
+<p>The last prompt will confirm the file to use by looking in the source pane for the script you are currently working on.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="dv">1</span><span class="op">:</span><span class="st"> </span>Use current file<span class="op">:</span><span class="st"> </span>runapp.R</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="dv">2</span><span class="op">:</span><span class="st"> </span>Choose file <span class="cf">in</span> browser</a>
+<a class="sourceLine" id="cb7-3" title="3"></a>
+<a class="sourceLine" id="cb7-4" title="4">Selection<span class="op">:</span><span class="st"> </span></a></code></pre></div>
 <p>There are additional arguments you can use to restart R or to clear the environment. The <code>keep</code> argument takes a regular expression as the pattern match. To get an exact match, use the <code><a href="https://rdrr.io/r/base/Arithmetic.html">^</a></code> and <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> to signify the beginning and end (ex. <code>^your_text$</code>). To list objects, separate them with a <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code>. as shown below.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="reference/load_reactive_objects.html">load_reactive_objects</a></span>(</a>
-<a class="sourceLine" id="cb5-2" title="2">  ...,</a>
-<a class="sourceLine" id="cb5-3" title="3">  <span class="dt">clear_environment =</span> <span class="ot">TRUE</span>, </a>
-<a class="sourceLine" id="cb5-4" title="4">  <span class="dt">keep =</span> <span class="st">"test_|^df$|raw_data"</span> <span class="co"># objects to keep</span></a>
-<a class="sourceLine" id="cb5-5" title="5">)</a></code></pre></div>
-<p>The package also has a function to view UI elements in one of two ways:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">shiny<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/shiny/man/selectInput.html">selectInput</a></span>(</a>
-<a class="sourceLine" id="cb6-2" title="2">  <span class="st">"state"</span>,</a>
-<a class="sourceLine" id="cb6-3" title="3">  <span class="st">"Choose a state:"</span>,</a>
-<a class="sourceLine" id="cb6-4" title="4">  <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(</a>
-<a class="sourceLine" id="cb6-5" title="5">    <span class="dt">East =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"NY"</span>, <span class="st">"NJ"</span>, <span class="st">"CT"</span>),</a>
-<a class="sourceLine" id="cb6-6" title="6">    <span class="dt">West =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"WA"</span>, <span class="st">"OR"</span>, <span class="st">"CA"</span>),</a>
-<a class="sourceLine" id="cb6-7" title="7">    <span class="dt">Midwest =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"MN"</span>, <span class="st">"WI"</span>, <span class="st">"IA"</span>)</a>
-<a class="sourceLine" id="cb6-8" title="8">  )</a>
-<a class="sourceLine" id="cb6-9" title="9">)</a>
-<a class="sourceLine" id="cb6-10" title="10"></a>
-<a class="sourceLine" id="cb6-11" title="11"><span class="co"># the output will automatically be used here</span></a>
-<a class="sourceLine" id="cb6-12" title="12"><span class="kw"><a href="reference/view_ui.html">view_ui</a></span>()</a></code></pre></div>
-<p>You can also pipe it</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">shiny<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/shiny/man/selectInput.html">selectInput</a></span>(</a>
-<a class="sourceLine" id="cb7-2" title="2">  <span class="st">"state"</span>,</a>
-<a class="sourceLine" id="cb7-3" title="3">  <span class="st">"Choose a state:"</span>,</a>
-<a class="sourceLine" id="cb7-4" title="4">  <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(</a>
-<a class="sourceLine" id="cb7-5" title="5">    <span class="dt">East =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"NY"</span>, <span class="st">"NJ"</span>, <span class="st">"CT"</span>),</a>
-<a class="sourceLine" id="cb7-6" title="6">    <span class="dt">West =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"WA"</span>, <span class="st">"OR"</span>, <span class="st">"CA"</span>),</a>
-<a class="sourceLine" id="cb7-7" title="7">    <span class="dt">Midwest =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"MN"</span>, <span class="st">"WI"</span>, <span class="st">"IA"</span>)</a>
-<a class="sourceLine" id="cb7-8" title="8">  )</a>
-<a class="sourceLine" id="cb7-9" title="9">) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/view_ui.html">view_ui</a></span>(<span class="dt">close_after =</span> <span class="ot">NULL</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw"><a href="reference/load_reactive_objects.html">load_reactive_objects</a></span>(</a>
+<a class="sourceLine" id="cb8-2" title="2">  ...,</a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="dt">restart =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb8-4" title="4">  <span class="dt">clear_environment =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb8-5" title="5">  <span class="dt">keep =</span> <span class="st">"test_|^df$|raw_data"</span> <span class="co"># objects to keep</span></a>
+<a class="sourceLine" id="cb8-6" title="6">)</a></code></pre></div>
+<p>If you made a small change to your reactive code, you can highlight the code in your source pane and run <code><a href="reference/convert_selection.html">convert_selection()</a></code> in the console.</p>
+<p><img src="reference/figures/convert_selection.png" width="400/"></p>
+<p>The package also has a function to view UI elements in a few ways:</p>
+<p>You run <code><a href="reference/view_ui.html">view_ui()</a></code> after sending the code the console. The html output will be used.</p>
+<p><img src="reference/figures/view_ui_after_output.png" width="600/"></p>
+<p>You can pipe it</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">shiny<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/shiny/man/selectInput.html">selectInput</a></span>(</a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="st">"state"</span>,</a>
+<a class="sourceLine" id="cb9-3" title="3">  <span class="st">"Choose a state:"</span>,</a>
+<a class="sourceLine" id="cb9-4" title="4">  <span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(</a>
+<a class="sourceLine" id="cb9-5" title="5">    <span class="dt">East =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"NY"</span>, <span class="st">"NJ"</span>, <span class="st">"CT"</span>),</a>
+<a class="sourceLine" id="cb9-6" title="6">    <span class="dt">West =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"WA"</span>, <span class="st">"OR"</span>, <span class="st">"CA"</span>),</a>
+<a class="sourceLine" id="cb9-7" title="7">    <span class="dt">Midwest =</span> <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"MN"</span>, <span class="st">"WI"</span>, <span class="st">"IA"</span>)</a>
+<a class="sourceLine" id="cb9-8" title="8">  )</a>
+<a class="sourceLine" id="cb9-9" title="9">) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw"><a href="reference/view_ui.html">view_ui</a></span>(<span class="dt">close_after =</span> <span class="ot">NULL</span>)</a></code></pre></div>
+<p><img src="reference/figures/view_ui.png" width="600/"></p>
 <p>Note that <code>close_after</code> is set to <code>NULL</code> in this example. The <code><a href="reference/view_ui.html">view_ui()</a></code> function launches an app and defaults to closing after 5 seconds. You can adjusts how long it runs or use <code>NULL</code> and stop it manually by using the stop sign.:red_circle:</p>
-<p><img src="reference/figures/view_ui.png"></p>
+<p>You can also highlight the code you want to view similar to <code><a href="reference/convert_selection.html">convert_selection()</a></code>. <img src="reference/figures/view_ui_selection.png" width="500/"></p>
 </div>
 </div>
   </div>
