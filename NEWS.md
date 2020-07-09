@@ -8,10 +8,10 @@
 * Rmd evaluated with or without spaces (`eval=F(ALSE)` or `eval = F(ALSE)`) (#26)
 ### Other
 * Underlying code parses expressions instead of strings (#41)
-* Reorganie code (renamed files/functions) (#36 #25)
+* Reorganize code (renamed files/functions) (#36 #25)
 
 # shinyobjects 0.1.1
-### New Featues
+### New Features
 * `view_ui()` can now run from selected text in the source editor (#19)
 ### Bug Fixes
 * `convert_selection()` now prompts user for environment if not entered (#16)
