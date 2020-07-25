@@ -30,7 +30,7 @@ find_input_code <- function(file){
   }
   
   # R files should use "dummy_input <-", Rmd should use "input <-"
-  input_code <- parsed[grepl("^(dummy_)?input (<-|=[^=])", parsed)]
+  input_code <- parsed[grepl("^(dummy_)?input(\\s)?(<-|=[^=])", parsed)]
   
   ifelse(
     length(input_code) > 0,
