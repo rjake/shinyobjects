@@ -28,6 +28,6 @@ test_that("finds all assignments", {
     find_all_assignments_r() %>%
     convert_assignments()
   
-  expect_equal(length(assignments), 5)
+  expect_equal(length(assignments), 4)
 })
 

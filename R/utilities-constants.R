@@ -2,8 +2,8 @@
 #' @noRd
 strings_to_find <- function() {
   paste0(
-    "^(library|", 
-    "[\\w\\.\\$0:9]+", 
-    " (<-|=[^=]))"
+    "^((library|require)\\(|", 
+    "[\\w\\._\\$0:9]+", 
+    "(\\s)?(<-|=[^=]))"
   )
 }

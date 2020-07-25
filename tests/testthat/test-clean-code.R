@@ -23,15 +23,6 @@ test_that("shiny::reactiveValues() and reactiveValues() both work", {
 })
 
 
-test_that("strings_to_find() most recent list", {
-  expect_equal(
-    strings_to_find(),
-    "^(library|[\\w\\.\\$0:9]+ (<-|=[^=]))"
-  )
-  
-})
-
-
 test_that("assignments can be = or <-", {
   x <- c("a", "a = 1", "b == 2", "c <- 3")
   expect_equal(
@@ -46,7 +37,7 @@ test_that("find all assignments r", {
     breakout_server_code("demo-r-server-some-inputs.R") %>% 
     find_all_assignments_r()
   
-  expect_equal(length(assignments), 5)
+  expect_equal(length(assignments), 4)
 })
 
 
