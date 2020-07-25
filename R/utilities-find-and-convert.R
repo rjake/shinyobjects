@@ -7,7 +7,11 @@
 #' @importFrom stringr str_detect
 #' @noRd
 find_all_assignments_r <- function(x) {
-  x[str_detect(as.character(x), strings_to_find())]
+  keep_x <-
+    str_detect(as.character(x), strings_to_find()) & 
+    !str_detect(as.character(x), "^dummy_(input|output|session)\\b")
+  
+  x[keep_x]
 }
 
 
