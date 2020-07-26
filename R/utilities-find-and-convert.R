@@ -51,8 +51,10 @@ update_expressions <- function(x){
     get_formals <- code_as_call[[3]][[2]]
     
     
-    if (grepl("reactive\\(", char_code)) {
-      get_formals <- code_as_call[[3]][[2]]
+    if (grepl("reactive\\(", char_code, ignore.case = TRUE)) {
+      if (grepl("eventReactive\\(", char_code)) {
+        get_formals <- code_as_call[[3]][[3]]
+      } 
       new_exp <-
         as.expression(
           bquote(
@@ -74,7 +76,7 @@ update_expressions <- function(x){
         )
       
       final_code <- new_exp
-    } else if (grepl("output\\$", as.character(x))) {
+    } else if (grepl("output\\$", char_code)) {
       new_exp <-
         as.expression(
           bquote(
