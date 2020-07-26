@@ -16,6 +16,7 @@ Imports:
   pander,
   purrr,
   readr,
+  rlang,
   rstudioapi,
   shiny,
   stringr,
