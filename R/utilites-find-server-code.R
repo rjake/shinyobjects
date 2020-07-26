@@ -86,16 +86,16 @@ extract_from_app <- function(code) {
   is_runapp <- confirm_function(orig_code[[1]][[1]], shiny::runApp)
 
   if (is_assigned) {
-    server_code <- orig_code[[1]][[3]][["server"]][[3]][-1]
+    server_code <- orig_code[[1]][[3]]
   } else if (is_shinyapp) {
-    server_code <- orig_code[[1]][[2]][[3]]
+    server_code <- orig_code[[1]] # w/in 1 function
   } else if (is_runapp) {
-    server_code <- orig_code[[1]][[2]][["server"]][[3]][-1]
+    server_code <- orig_code[[1]][[2]] # w/in 2 functions
   }
   
   update_code( 
     code = code,
-    server_code = server_code,
+    server_code = server_code[["server"]][[3]][-1], # -1 removes "{" from expression
     replace_line = app_line
   )
 }
