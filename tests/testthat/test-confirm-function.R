@@ -1,3 +1,5 @@
+library(shiny)
+
 test_that("confirm_function works", {
   code <-
     rlang::parse_exprs(
