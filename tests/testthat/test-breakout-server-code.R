@@ -1,8 +1,8 @@
-test_that("stop if multiple server <- ", {
+test_that("warn if multiple server <- ", {
  code <- "server <- 1; server <- 2;"
  tmp <- tempfile("data")
  write(code, tmp)
- expect_error(breakout_server_code(file = tmp)) 
+ expect_warning(breakout_server_code(file = tmp)) 
  unlink(tmp)
 })
 
