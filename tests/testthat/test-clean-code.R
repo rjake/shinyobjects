@@ -1,6 +1,3 @@
-library(testthat)
-library(shinyobjects)
-
 test_that("shiny::reactive() and reactive() both work", {
   no_namespace <- parse(text = "test <- shiny::reactive(123)")
   with_namespace <- parse(text = "test <- reactive(123)")
@@ -47,8 +44,6 @@ test_that("find all assignments rmd", {
 })
 
 
-
-
 test_that("find input code", {
   inputs_rmd <- find_input_code("demo-rmd-full.Rmd")
   inputs_r_runapp <- find_input_code("demo-r-runapp-list.R")
@@ -61,3 +56,4 @@ test_that("find input code", {
     "input <- list(x = 1, y = 2)"
   )
 })
+

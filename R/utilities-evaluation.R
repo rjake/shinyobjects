@@ -17,3 +17,13 @@ eval_code <- function(x, envir = NULL) {
     }
   )
 }
+
+
+#' Confirm that function is shiny version of function
+#' See tests
+#' @noRd
+#' @importFrom rlang eval_bare
+#' 
+confirm_function <- function(expr, fun) {
+  identical(eval_bare(expr), fun)
+}

@@ -1,3 +1,5 @@
+# Find ----
+
 #' Find all libraries and assignments for R files
 #'
 #' @param x code to evaluate
@@ -29,6 +31,11 @@ find_all_assignments_rmd <- function(file) {
   find_all_assignments_r(x)
 }
 
+
+# Convert ----
+
+# see notes from Garrick Aden-Buie
+# https://gist.github.com/gadenbuie/cc386bdc6a636ba592c520d96af82e3f
 
 #' Update expressions to be non-reactive
 #' @param x code to evaluate
