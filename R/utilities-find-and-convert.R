@@ -40,20 +40,22 @@ find_all_assignments_rmd <- function(file) {
 #' Update expressions to be non-reactive
 #' @param x code to evaluate
 #' @noRd
+#' @examples
+#' update_expressions(expression(y <- eventReactive(input$button, {print(input$n)})))
 update_expressions <- function(x){
-  char_code <- as.character(x)
+  char_code <- as.character(as.expression(x))
   
   if (!grepl("<-.*\\(", char_code)) {
     final_code <- x
   } else {
     code_as_call <- as.call(x)[[1]]
     get_symbol <- code_as_call[[2]] 
-    get_formals <- code_as_call[[3]][[2]]
+    get_formals <- code_as_call[[3]][[2]] # works for most
     
     
     if (grepl("reactive\\(", char_code, ignore.case = TRUE)) {
       if (grepl("eventReactive\\(", char_code)) {
-        get_formals <- code_as_call[[3]][[3]]
+        get_formals <- return_inner_expression(code_as_call[[3]], "valueExpr")
       } 
       new_exp <-
         as.expression(
