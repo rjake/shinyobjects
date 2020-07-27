@@ -49,6 +49,7 @@ return_inner_expression <- function(x, name) {
 #'
 #' @param x 
 #' @noRd
+#' @importFrom methods formalArgs
 #' @examples
 #' full_argument_names(expression(gsub(' ', '_', 'a b c')))
 #' full_argument_names(expression(gsub(x = 'a b c', ' ', '_')))
