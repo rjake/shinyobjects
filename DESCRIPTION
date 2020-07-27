@@ -13,6 +13,7 @@ Imports:
   glue,
   knitr,
   magrittr,
+  methods,
   pander,
   purrr,
   readr,
