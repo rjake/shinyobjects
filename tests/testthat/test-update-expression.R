@@ -64,3 +64,15 @@ test_that("updates reactive to function", {
     expected = "expression(y <- function() {print(input$n)})"
   )
 })
+
+
+
+test_that("updates eventReactive to function", {
+  code <- expression(y <- eventReactive(input$button, {print(input$n)}))
+  new_code <- update_expressions(code)
+  actual <- paste(trimws(deparse(new_code)), collapse = "")
+  expect_equal(
+    object = actual,
+    expected = "expression(y <- function() {print(input$n)})"
+  )
+})
