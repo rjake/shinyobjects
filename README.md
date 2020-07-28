@@ -48,17 +48,23 @@ devtools::install_github("rjake/shinyobjects")
 
 ## Usage
 
-The main function of `shinyobjects` is `load_reactive_objects()`. It is
-similar to running `source()` but with a lot of helpers to give you
-access to the reactive data. When you run it, your environment will have
-all your libraries, raw data and assignments, dummy `input`, `output`
-and `session` lists, and all `reactive()` assignments will be converted
-to functions. In the dev version (for 0.2.0), you also get access to
-your `render...()` objects in the dummy `output` list. With the dummy
-`input` list and the conversion of `reactive(x)` to `function() x`, the
-code will run your data manipulation referencing your dummy `input` list
-and it will be like writing a normal script. Note: **shinyobjects does
-not change your files**; the manipulation happens behind the scenes.
+There is a quick tutorial on [YouTube](https://youtu.be/_z_XeXT96Uw)
+
+<a href="https://youtu.be/_z_XeXT96Uw">
+<img src="man/figures/youtube_thumbnail.png"> </a>
+
+…but in words, the main function of `shinyobjects` is
+`load_reactive_objects()`. It is similar to running `source()` but with
+a lot of helpers to give you access to the reactive data. When you run
+it, your environment will have all your libraries, raw data and
+assignments, dummy `input`, `output` and `session` lists, and all
+`reactive()` assignments will be converted to functions. In the dev
+version (for 0.2.0), you also get access to your `render...()` objects
+in the dummy `output` list. With the dummy `input` list and the
+conversion of `reactive(x)` to `function() x`, the code will run your
+data manipulation referencing your dummy `input` list and it will be
+like writing a normal script. Note: **shinyobjects does not change your
+files**; the manipulation happens behind the scenes.
 
 <img src="man/figures/load_reactive_objects.png"  width=600/>
 
