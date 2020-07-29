@@ -1,9 +1,6 @@
-library(testthat)
-library(shinyobjects)
-
 test_that("shiny::reactive() and reactive() both work", {
-  no_namespace <- "test <- shiny::reactive(abcd"
-  with_namespace <- "test <- reactive(abcd"
+  no_namespace <- parse(text = "test <- shiny::reactive(123)")
+  with_namespace <- parse(text = "test <- reactive(123)")
   
   expect_equal(
     convert_assignments(no_namespace),
@@ -11,27 +8,15 @@ test_that("shiny::reactive() and reactive() both work", {
   )        
 })
 
-test <- function() list(
-  a = 1, 
-  b = 2
-)
 
 test_that("shiny::reactiveValues() and reactiveValues() both work", {
-  no_namespace <- "test <- shiny::reactiveValues(a = 1, b = 2)"
-  with_namespace <- "test <- reactiveValues(a = 1, b = 2)"
+  no_namespace <- parse(text = "test <- shiny::reactiveValues(a = 1, b = 2)")
+  with_namespace <- parse(text = "test <- reactiveValues(a = 1, b = 2)")
   
   expect_equal(
     convert_assignments(no_namespace),
     convert_assignments(with_namespace)
   )        
-})
-
-test_that("strings_to_find() most recent list", {
-  expect_equal(
-    strings_to_find(),
-    "^(library|[\\w\\.\\$0:9]+ (<-|=[^=]))"
-  )
-  
 })
 
 
@@ -49,27 +34,13 @@ test_that("find all assignments r", {
     breakout_server_code("demo-r-server-some-inputs.R") %>% 
     find_all_assignments_r()
   
-  expect_equal(length(assignments), 2)
+  expect_equal(length(assignments), 4)
 })
 
 
 test_that("find all assignments rmd", {
   assignments <- find_all_assignments_rmd("demo-rmd-full.Rmd")
-  expect_equal(length(assignments), 2)
-})
-
-
-test_that("code_to_df", {
-  x <- "a <- reactive(x)"
-  actual <- code_to_df(x)
-  
-  expected <-
-    tibble::tibble(
-      raw = x,
-      code = "a <- function() (x)"
-    )
-  
-  expect_equal(actual, expected)
+  expect_equal(length(assignments), 5)
 })
 
 
@@ -85,3 +56,4 @@ test_that("find input code", {
     "input <- list(x = 1, y = 2)"
   )
 })
+

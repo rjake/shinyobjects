@@ -9,8 +9,13 @@ input <-
 ```
 
 ```{r}
+library(shiny)
 renderText(input$x)
 renderText(input$y)
-a <- reactiveValues(x = input$x)
+my_df <- reactive({
+  head(cars, input$x)
+})
+
+about_df <- reactiveValues(n_obs = nrow(my_df()), len = length(my_df()))
 ```
 

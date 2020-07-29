@@ -16,7 +16,10 @@
 # shinyobjects 0.1.1
 ### New Features
 * `view_ui()` can now run from selected text in the source editor (#19)
+### Bug Fixes
 * `convert_selection()` now prompts user for environment if not entered (#16)
+### Other
+* New logo (#21)
 
 # shinyobjects 0.1.0 
 Initial release

@@ -15,14 +15,17 @@ Downloads](https://cranlogs.r-pkg.org/badges/grand-total/shinyobjects)](https://
 Troubleshooting reactive data in a `shiny` app or `flexdashboard` can be
 difficult. The goal of this package is to access reactive objects in
 your local environment. This allows you to debug your code without
-having to actually run the app. It is my hope that this will save you
-time and allow you to iterate more quickly. The package converts
-reactive data frames into functions that will read from your raw data
-and become available in your environment. The main function will also
-recommended that you create a dummy `input` list in your script to
-simulate the reactive inputs. When you run the main function,
-`load_reactive_objects()`, it will prepopulate this list. You can learn
-more about dummy input lists in [this
+having to run the app. It is my hope that this will save you time and
+allow you to iterate more quickly.
+
+### How does it work?
+
+The package converts reactive data frames into functions that will read
+from your raw data and become available in your environment. The main
+function, `load_reactive_objects()`, will recommended that you create a
+dummy `input` list in your script to simulate reactive inputs. When you
+run `load_reactive_objects()`, it will prepopulate this list. You can
+learn more about dummy input lists in [this
 vignette](https://rjake.github.io/shinyobjects/articles/tips-and-tricks.html).
 The package also includes a function to view your UI elements in the
 viewer pane (see below).
@@ -45,19 +48,35 @@ devtools::install_github("rjake/shinyobjects")
 
 ## Usage
 
-There is a dummy flexdashboard available when the package is installed
-for you to see how this works.
+There is a quick tutorial on [YouTube](https://youtu.be/_z_XeXT96Uw)
+
+<a href="https://youtu.be/_z_XeXT96Uw">
+<img src="man/figures/youtube_thumbnail.png"> </a>
+
+…but in words, the main function of `shinyobjects` is
+`load_reactive_objects()`. It is similar to running `source()` but with
+a lot of helpers to give you access to the reactive data. When you run
+it, your environment will have all your libraries, raw data and
+assignments, dummy `input`, `output` and `session` lists, and all
+`reactive()` assignments will be converted to functions. In the dev
+version (for 0.2.0), you also get access to your `render...()` objects
+in the dummy `output` list. With the dummy `input` list and the
+conversion of `reactive(x)` to `function() x`, the code will run your
+data manipulation referencing your dummy `input` list and it will be
+like writing a normal script. Note: **shinyobjects does not change your
+files**; the manipulation happens behind the scenes.
+
+<img src="man/figures/load_reactive_objects.png"  width=600/>
 
 ``` r
 library(shinyobjects)
 
-# If the app is open, you can just run load_reactive_objects()
-# The function will detect the app that is currently open
-system.file(package = "shinyobjects", "Rmd/test_dashboard_no_inputs.Rmd") %>% 
- load_reactive_objects()
+# If the app is open, the function will ask to use 
+# the script currently active in the source pane
+load_reactive_objects()
 ```
 
-This will result in the following output
+This will result in something like the following message
 
     Here are the inputs you have listed:
     
@@ -66,26 +85,48 @@ This will result in the following output
     2       year           2  48,49     TRUE
     
     
-    Add this code chunk to your Rmd:
-    ```{r input_demo, eval = FALSE}
+    # Add this code to your R file:
+    dummy_input <- list(
+      displ = "",
+      year = ""
+    )
+
+If you are working on a `flexdashboard`, you will get a slightly
+different message to add a code chunk. Note this has `eval=FALSE` so it
+only runs when you need it for troubleshooting
+
+    #Add this code chunk to your Rmd:
+    ```{r input_demo, eval = FALSE}")
     input <- list(
       displ = "",
       year = ""
     )
     ```
-    
-    WARNING: This next step will load all object assignments into your environment.
-    Do you want to continue? 
-    
-    1: Yes
-    2: No
 
-Hitting `1` will then update your environment with all raw data and
-assignments, your dummy `input` list, and all reactive objects will be
-converted to functions. As functions, the code will keep all the data
-manipulation and reference your dummy `input` list. Note: **this
-function does not change your files**; the manipulation happens within
-the function.
+It will then ask you where to put the objects when it sources the
+script:
+
+    WARNING: Which environment do you want to use? 
+    
+    1: Global
+    2: New
+    3: Cancel
+    
+    Selection:
+
+**Be careful here** `load_reactive_objects()` will overwrite objects
+with the same name in your environment.
+
+Hit `1` or `2` to select the environment. You can also specify the
+environment using the `envir = ...` argument.
+
+The last prompt will confirm the file to use by looking in the source
+pane for the script you are currently working on.
+
+    1: Use current file: runapp.R
+    2: Choose file in browser
+    
+    Selection: 
 
 There are additional arguments you can use to restart R or to clear the
 environment. The `keep` argument takes a regular expression as the
@@ -96,29 +137,25 @@ with a `|`. as shown below.
 ``` r
 load_reactive_objects(
   ...,
+  restart = TRUE,
   clear_environment = TRUE, 
   keep = "test_|^df$|raw_data" # objects to keep
 )
 ```
 
-The package also has a function to view UI elements in one of two ways:
+If you made a small change to your reactive code, you can highlight the
+code in your source pane and run `convert_selection()` in the console.
 
-``` r
-shiny::selectInput(
-  "state",
-  "Choose a state:",
-  list(
-    East = c("NY", "NJ", "CT"),
-    West = c("WA", "OR", "CA"),
-    Midwest = c("MN", "WI", "IA")
-  )
-)
+<img src="man/figures/convert_selection.png"  width=400/>
 
-# the output will automatically be used here
-view_ui()
-```
+The package also has a function to view UI elements in a few ways:
 
-You can also pipe it
+You run `view_ui()` after sending the code the console. The html output
+will be used.
+
+<img src="man/figures/view_ui_after_output.png"  width=600/>
+
+You can pipe it
 
 ``` r
 shiny::selectInput(
@@ -132,9 +169,13 @@ shiny::selectInput(
 ) %>% view_ui(close_after = NULL)
 ```
 
+<img src="man/figures/view_ui.png"  width=600/>
+
 Note that `close_after` is set to `NULL` in this example. The
 `view_ui()` function launches an app and defaults to closing after 5
 seconds. You can adjusts how long it runs or use `NULL` and stop it
 manually by using the stop sign.:red\_circle:
 
-<img src="man/figures/view_ui.png"/>
+You can also highlight the code you want to view similar to
+`convert_selection()`.
+<img src='man/figures/view_ui_selection.png' width=500/>

@@ -12,7 +12,7 @@ test_that("uses provided environment - Rmd", {
   e <- new.env()
   stub(load_reactive_objects, "interactive", TRUE)
   load_reactive_objects(file = "demo-rmd-full.Rmd", envir = e)
-  expect_true(length(ls(e)) == 5)
+  expect_true(length(ls(e)) == 7)
 })
 
 
