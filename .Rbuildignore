@@ -10,3 +10,5 @@ inst/Rmd/rsconnect/
 ^codecov\.yml$
 ^cran-comments\.md$
 ^CRAN-RELEASE$
+^doc$
+^Meta$

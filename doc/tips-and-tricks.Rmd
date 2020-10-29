@@ -1,0 +1,91 @@
+---
+title: "Tips and Tricks"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Tips and Tricks}
+  %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, eval = FALSE)
+
+input <-list(
+  displ = 1.8,
+  year = 2008,
+  drv = "f"
+)
+```
+
+It can be challenging to troubleshoot or design the output of reactive data elements in a flexdashboard. Very often, to see a change, the builder has to run the dashboard in order to see the output. This package is designed to alleviate this challenge by turning your reactive objects into functions you can interact with in the console. Here are a few tips that will help you (and others) troubleshoot your code:
+
+## Create a chunk to hold dummy input values
+If you create a chunk like the code below, you will be able to simulate reactive values like `input$displ` and `input$year` without having to run the whole dashboard. The `input` object created here is a list containing 3 elements (`displ`,  `year`, and `drv`). By creating the list named `input` in a chunk of your code, you can simulate the way the values will work when it actually runs. Do note, you will need to use `eval = FALSE` in the chunk so this part of your code will be ignored when the dashboard is run.
+
+````r
+`r ''````{r input_demo, eval = FALSE}
+input <-list(
+  displ = 1.8,
+  year = 2008,
+  drv = "f"
+)
+
+```
+````
+
+With the dummy `input` object created earlier, I am able to run the `df` and subsequent `ggplot()` code locally in the console. As a note, running all of `renderPlot()` will only show text in the console but if you run the `df <-` section and the `ggplot()` section, you will have access to `df` in your environment and see the bar chart in the plot pane of RStudio.
+
+```{r show_plot}
+library(tidyverse)
+library(shiny)
+
+raw_data <- mpg
+
+renderPlot({
+  df <- 
+    raw_data %>% 
+    filter(
+      displ >= input$displ,
+      year == input$year,
+      drv == input$drv
+    )
+
+  ggplot(df, aes(class)) +
+    geom_bar()
+})
+```
+
+
+## Put reactive objects within their reactive outputs
+I often see something like the code below. Notice that there are two reactive steps: `reactive()` to create the reactive data frame and then `renderPlot()`. 
+```{r}
+reactive_df <- reactive(
+  raw_data %>% 
+    filter(displ >= input$displ)
+)
+
+renderPlot(
+  ggplot(reactive_df(), aes(class)) +
+    geom_bar()
+)
+```
+
+If this reactive data frame is created *only* for this one plot, you can embed the data manipulation within the `renderPlot()` function. If this data will be used thin two or more outputs in the dashboard and has a lot of data manipulation, a reactive dataframe is a good idea.
+
+```{r}
+renderPlot({
+  df <-
+    raw_data %>% 
+    filter(displ >= input$displ)
+    
+  ggplot(df, aes(class)) + geom_bar()
+})
+```
+
+
+When you add curly braces `{...}` inside the `renderPlot()` it creates a mini environment where you can create multiple objects. This is similar to how you might do the same in a `function() {...}` or a loop `for(i in 1:10) {...}`
+
+
+## In summary
+* Try to design your code so you can troubleshoot it without having to run it
+* Use the curly braces inside your `render*({...})` functions if you need to do data manipulation in order to create an output

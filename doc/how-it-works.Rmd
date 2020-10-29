@@ -1,0 +1,78 @@
+---
+title: "How it Works"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{How it Works}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Under the hood, `shinyobjects` parses your code and moves around the arguments of reactive and rendered objects so that you can interact with them from the global environment. While not required, this workflow works best with a static `input` list that `shinyobjects` can help create. You can read more about the benefits of creating a dummy `input` list [here](https://rjake.github.io/shinyobjects/articles/tips-and-tricks.html#create-a-chunk-to-hold-dummy-input-values)  
+
+### So what happens? 
+
+The main function, `load_reactive_objects()` takes the following steps:
+
+* **parse the code** that is active in the source pane or otherwise specified
+  * can parse `.Rmd` files, apps with a `server.R` file, or files using `shinyServer()`, `runApp()`, or `shinyApp()`
+
+* **keep** `library()`, `load()`, and assignment calls (`<-` or `=`), everything else is discarded
+
+* **rewrite the expressions**:
+  * for `reactive(x = ...)`,  the `x` argument is moved to the body of a function. For `eventReactive(event, valueExpr = ...)` it uses the `valueExpr` argument. Thus
+    ```r
+    reactive_df <- reactive({  
+        mtcars %>% 
+          head(input$n)
+    }) 
+    ```
+    becomes
+    ```r
+    reactive_df <- function() {
+        mtcars %>% 
+          head(input$n)
+    }
+    ```
+    Now that it is a function, you can view and manipulate `reactive_df()`
+  <br>
+  <br>
+  * for `reactiveValues()`
+  
+    `x <- reactiveValues(n = input$n)` 
+  
+    becomes 
+  
+    `x <- list(n = input$n)`
+  <br>
+  <br>
+  * for `output` assignments
+    * `output$x <- renderPlot(expr)` 
+      
+      becomes
+      
+      `output$x <- recordPlot(expr)`
+  <br>
+  <br>
+   * for all other `output` assignments, the `expr` arguments are directly assigned 
+      
+      `output$text <- renderText(paste("there are", input$n, "observations))`
+      
+      becomes
+      
+      `output$text <- (paste("there are", input$n, "observations))`
+
+* **evaluate the modified expressions** into the specified environment, usually, the global   environment 
+
+
+### Also...
+
+* `load_reactive_objects()`  has options to restart your R session and/or clear out your   environment
+<br>
+<br>
+* There are two other functions:
+
+  * `convert_selection()` does a shorter version of these steps using the code highlighted in the source pane 
+  <br>
+  <br>
+  * `view_ui()` works with UI components. It takes either the html output in the console or   selected code in the source pane and runs a shiny app of just that object.
+  
