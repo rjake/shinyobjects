@@ -1,6 +1,6 @@
 test_that("shiny::reactive() and reactive() both work", {
-  no_namespace <- parse(text = "test <- shiny::reactive(123)")
-  with_namespace <- parse(text = "test <- reactive(123)")
+  no_namespace <- parse_exprs("test <- shiny::reactive(123)")
+  with_namespace <- parse_exprs("test <- reactive(123)")
   
   expect_equal(
     convert_assignments(no_namespace),
@@ -10,8 +10,8 @@ test_that("shiny::reactive() and reactive() both work", {
 
 
 test_that("shiny::reactiveValues() and reactiveValues() both work", {
-  no_namespace <- parse(text = "test <- shiny::reactiveValues(a = 1, b = 2)")
-  with_namespace <- parse(text = "test <- reactiveValues(a = 1, b = 2)")
+  no_namespace <- parse_exprs("test <- shiny::reactiveValues(a = 1, b = 2)")
+  with_namespace <- parse_exprs("test <- reactiveValues(a = 1, b = 2)")
   
   expect_equal(
     convert_assignments(no_namespace),

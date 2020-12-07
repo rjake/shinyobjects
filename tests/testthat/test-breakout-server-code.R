@@ -9,7 +9,7 @@ test_that("warn if multiple server <- ", {
 
 test_that("use everything when missing server <- ", {
   code <- "a <- 1; b <- 2;"
-  expected <- parse(text = "a <- 1; b <- 2")
+  expected <- parse_exprs("a <- 1; b <- 2")
 
   tmp <- tempfile("data")
   write(code, tmp)
