@@ -40,79 +40,118 @@ find_all_assignments_rmd <- function(file) {
 #' Update expressions to be non-reactive
 #' @param x code to evaluate
 #' @noRd
+#' @importFrom rlang expr call_standardise
 #' @examples
-#' update_expressions(expression(y <- eventReactive(input$button, {print(input$n)})))
+#' update_expressions(
+#'  x = expr(y <- eventReactive(input$button, {print(input$n)}))
+#' )
+#' update_expressions(
+#'  x = expr(output$plot <- renderPlot(plot(1, 1)))
+#' )
+#' update_expressions(
+#'  x = expr(output$plot <- shiny::renderPlot(plot(1, 1)))
+#' )
 update_expressions <- function(x){
-  char_code <- as.character(as.expression(x))
+  #char_code <- as.character(as.expression(x))
+  # code_as_call <- as.call(x)
   
-  if (!grepl("<-.*\\(", char_code)) {
-    final_code <- x
-  } else {
-    code_as_call <- as.call(x)[[1]]
-    get_symbol <- code_as_call[[2]] 
-    get_formals <- code_as_call[[3]][[2]] # works for most
+  # if not assigned (ex: library(...))
+  if (
+    x[[1]] != as.symbol("<-") & 
+    x[[1]] != as.symbol("=") &
+    length(x) != 3
+  ) {
+    return(x)
+  }
+  
+  # if no function involved
+  if (length(x[[3]]) == 1) {
+    return(x)
+  }
+  
+  # otherwise rearrange
+  get_symbol   <- x[[2]]
+  get_identity <- x[[3]]
+  get_fn       <- get_identity[[1]]
+  get_formals  <- get_identity[[2]]
+  
+  # reactive(...) -> function() {...}
+  if (confirm_function(get_fn, shiny::reactive)) {
+    new_expr <- expr(!!get_symbol <- function() { 
+      !!get_formals 
+    })
     
+    return(new_expr)
+  }
+  
+  # eventReactive(...) -> function() {...}
+  if (confirm_function(get_fn, shiny::eventReactive)) {
+    new_expr <- expr(!!get_symbol <- function() {
+      !!call_standardise(get_identity)[["valueExpr"]]
+    })
     
-    if (grepl("reactive\\(", char_code, ignore.case = TRUE)) {
-      if (grepl("eventReactive\\(", char_code)) {
-        get_formals <- return_inner_expression(code_as_call[[3]], "valueExpr")
-      } 
-      new_exp <-
-        as.expression(
-          bquote(
-            .(get_symbol) <- function() .(get_formals)
-          )
-        )
+    return(new_expr)
+  }
+  
+  # reactiveValues(...) -> list(...)
+  if (confirm_function(get_fn, shiny::reactiveValues)) {
+    x[[3]][[1]] <- as.symbol("list")
+    return(x)
+  }
+
+  # if not an x$y or x[[y]] object
+  if (length(get_symbol) == 1) {
+    return(x)
+  }
+  
+  # if not output$x
+  if (get_symbol[[2]] != as.symbol("output")) {
+    return(x)
+  }
+  
+  # renderPlot(...) -> recordPlot(...)
+  if (confirm_function(get_fn, shiny::renderPlot)) {
+      new_exp <- expr(!!get_symbol <- grDevices::recordPlot(!!get_formals))
       
-      final_code <- new_exp
-    } else if (grepl("reactiveValues\\(", char_code)) {
-      code_as_call[[3]][[1]] <- as.symbol("list")
-      
-      final_code <- as.expression(code_as_call)
-    } else if (grepl("output\\$.*renderPlot", char_code)) {
-      new_exp <-
-        as.expression(
-          bquote(
-            .(get_symbol) <- recordPlot(.(get_formals))
-          )
-        )
-      
-      final_code <- new_exp
-    } else if (grepl("output\\$", char_code)) {
-      new_exp <-
-        as.expression(
-          bquote(
-            .(get_symbol) <- (.(get_formals))
-          )
-        )
-      
-      final_code <- new_exp
-    } else {
-      final_code <- x
-    } 
-  }  
-  final_code
+      return(new_exp)
+  } 
+  
+  new_exp <- expr(!!get_symbol <- !!get_formals)
+  
+  return(new_exp)
 }
 
 
 #' Convert reactive dataframes to functions
 #'
 #' @param x text to be converted
-#' @importFrom stringr str_detect str_replace_all
+#' @importFrom rlang exprs
 #' @noRd
+#' @examples 
+#' convert_assignments(
+#'   x = exprs(a <- reactive(123), output$x <- renderTable(mtcars))
+#' )
 convert_assignments <- function(x) {
   
-  exp_list <- expression()
+  exp_list <- exprs()
   
   for (i in seq_along(x)) {
+    new_code <-
+      tryCatch(
+        update_expressions(x[[i]]),
+        error = function(e) {
+          message("there was an error")
+          print(glue::glue(as.character(x)))
+        }
+      )
+    
     exp_list <- 
       append(
         exp_list, 
-        as.list(update_expressions(x[i])),
+        new_code,
         after = i - 1
       )
   }
   
   exp_list
 }
-
