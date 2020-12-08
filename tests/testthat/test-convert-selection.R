@@ -1,4 +1,6 @@
-library(mockery)
+suppressWarnings(library(mockery))
+suppressWarnings(library(shiny))
+
 
 mock_text <- list(
   selection = list(

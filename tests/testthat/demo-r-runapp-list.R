@@ -6,7 +6,7 @@ runApp(
   list(
     ui = fluidPage(
       numericInput("x", "# of obs.", 20),
-      plotOutput("plot")
+      tableOutput("df")
   ),
   server = function(input, output) {
     my_df <- reactive({
@@ -16,8 +16,8 @@ runApp(
     about_df <- reactiveValues(n_obs = nrow(my_df()), len = length(my_df()))
     
     
-    output$plot <- renderPlot(
-      plot(my_df())
+    output$df <- renderTable(
+      my_df()
     )
   }
   ))

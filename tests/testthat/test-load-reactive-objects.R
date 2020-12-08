@@ -1,4 +1,6 @@
-library(mockery)
+# suppressWarnings(library(rlang))
+# suppressWarnings(library(shiny))
+suppressWarnings(library(mockery))
 
 test_that("uses provided environment - R", {
   e <- new.env()
@@ -20,9 +22,9 @@ test_that("uses provided environment - Rmd", {
 # test_that("uses global environment", {
 #   stub(load_reactive_objects, "interactive", TRUE)
 #   stub(ask_for_environment, "menu", 1, 2)
-#   load_reactive_objects(file = "demo-r-runapp-full.R")
-#   print(length(ls(.GlobalEnv)))
-#   expect_true(length(ls(.GlobalEnv)) == 6)
+#   load_reactive_objects(file = "demo-r-runapp-list.R")
+#   # print(length(ls(.GlobalEnv)))
+#   expect_true(length(ls(.GlobalEnv)) == 5)
 # })
 
 
@@ -48,3 +50,4 @@ test_that("clears environment", {
   )
   expect_true(length(ls(e)) == 8)
 })
+
