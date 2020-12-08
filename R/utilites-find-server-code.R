@@ -4,6 +4,7 @@
 #'
 #' @param file file to parse
 #' @noRd
+#' @importFrom rlang parse_exprs
 #' @examples 
 #' if (interactive()) {
 #' breakout_server_code(file = "inst/shiny/server.R") %>% 
@@ -12,7 +13,7 @@
 breakout_server_code <- function(file) {
   # file <- "tests/testthat/demo-r-runapp-shinyapp_assigned.R"
   
-  code <- parse(file)
+  code <- parse_exprs(file(file))
   char_code <- as.character(code)
 
   if (!any(grep("server.*(=|<-)", char_code))) {
