@@ -1,5 +1,10 @@
-library(mockery)
+suppressWarnings(library(mockery))
 
+# ask_for_environment() ----
+#test_that("ask_for_environment", TRUE)
+
+
+# which_file()----
 test_that("file name used", {
   expected <- "test.R"
   actual <- which_file(expected)

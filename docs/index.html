@@ -125,41 +125,41 @@
 <span class="co"># the script currently active in the source pane</span>
 <span class="fu"><a href="reference/load_reactive_objects.html">load_reactive_objects</a></span>()</pre></div>
 <p>This will result in something like the following message</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">Here are the inputs you have listed<span class="op">:</span></a>
-<a class="sourceLine" id="cb4-2" title="2"></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="st">  </span>input_name  times_used  lines  missing</a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="dv">1</span>      displ           <span class="dv">1</span>     <span class="dv">45</span>     <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="dv">2</span>       year           <span class="dv">2</span>  <span class="dv">48</span>,<span class="dv">49</span>     <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb4-6" title="6"></a>
-<a class="sourceLine" id="cb4-7" title="7"></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="co"># Add this code to your R file:</span></a>
-<a class="sourceLine" id="cb4-9" title="9">dummy_input &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb4-10" title="10">  <span class="dt">displ =</span> <span class="st">""</span>,</a>
-<a class="sourceLine" id="cb4-11" title="11">  <span class="dt">year =</span> <span class="st">""</span></a>
-<a class="sourceLine" id="cb4-12" title="12">)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>Here are the inputs you have listed<span class="op">:</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="st">  </span>input_name  times_used  lines  missing</span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="dv">1</span>      displ           <span class="dv">1</span>     <span class="dv">45</span>     <span class="ot">TRUE</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="dv">2</span>       year           <span class="dv">2</span>  <span class="dv">48</span>,<span class="dv">49</span>     <span class="ot">TRUE</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co"># Add this code to your R file:</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>dummy_input &lt;-<span class="st"> </span><span class="kw">list</span>(</span>
+<span id="cb4-10"><a href="#cb4-10"></a>  <span class="dt">displ =</span> <span class="st">""</span>,</span>
+<span id="cb4-11"><a href="#cb4-11"></a>  <span class="dt">year =</span> <span class="st">""</span></span>
+<span id="cb4-12"><a href="#cb4-12"></a>)</span></code></pre></div>
 <p>If you are working on a <code>flexdashboard</code>, you will get a slightly different message to add a code chunk. Note this has <code>eval=FALSE</code> so it only runs when you need it for troubleshooting</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co">#Add this code chunk to your Rmd:</span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="st">```</span><span class="dt">{r input_demo, eval = FALSE}")</span></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="dt">input &lt;- list(</span></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="dt">  displ = "",</span></a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="dt">  year = ""</span></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="dt">)</span></a>
-<a class="sourceLine" id="cb5-7" title="7"><span class="st">```</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co">#Add this code chunk to your Rmd:</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="st">```</span><span class="dt">{r input_demo, eval = FALSE}")</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="dt">input &lt;- list(</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="dt">  displ = "",</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="dt">  year = ""</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="dt">)</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="st">```</span></span></code></pre></div>
 <p>It will then ask you where to put the objects when it sources the script:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">WARNING<span class="op">:</span><span class="st"> </span>Which environment do you want to use? </a>
-<a class="sourceLine" id="cb6-2" title="2"></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="dv">1</span><span class="op">:</span><span class="st"> </span>Global</a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="dv">2</span><span class="op">:</span><span class="st"> </span>New</a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="dv">3</span><span class="op">:</span><span class="st"> </span>Cancel</a>
-<a class="sourceLine" id="cb6-6" title="6"></a>
-<a class="sourceLine" id="cb6-7" title="7">Selection<span class="op">:</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>WARNING<span class="op">:</span><span class="st"> </span>Which environment do you want to use? </span>
+<span id="cb6-2"><a href="#cb6-2"></a></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="dv">1</span><span class="op">:</span><span class="st"> </span>Global</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="dv">2</span><span class="op">:</span><span class="st"> </span>New</span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="dv">3</span><span class="op">:</span><span class="st"> </span>Cancel</span>
+<span id="cb6-6"><a href="#cb6-6"></a></span>
+<span id="cb6-7"><a href="#cb6-7"></a>Selection<span class="op">:</span></span></code></pre></div>
 <p><strong>Be careful here</strong> <code><a href="reference/load_reactive_objects.html">load_reactive_objects()</a></code> will overwrite objects with the same name in your environment.</p>
 <p>Hit <code>1</code> or <code>2</code> to select the environment. You can also specify the environment using the <code>envir = ...</code> argument.</p>
 <p>The last prompt will confirm the file to use by looking in the source pane for the script you are currently working on.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="dv">1</span><span class="op">:</span><span class="st"> </span>Use current file<span class="op">:</span><span class="st"> </span>runapp.R</a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="dv">2</span><span class="op">:</span><span class="st"> </span>Choose file <span class="cf">in</span> browser</a>
-<a class="sourceLine" id="cb7-3" title="3"></a>
-<a class="sourceLine" id="cb7-4" title="4">Selection<span class="op">:</span><span class="st"> </span></a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="dv">1</span><span class="op">:</span><span class="st"> </span>Use current file<span class="op">:</span><span class="st"> </span>runapp.R</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="dv">2</span><span class="op">:</span><span class="st"> </span>Choose file <span class="cf">in</span> browser</span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a>Selection<span class="op">:</span><span class="st"> </span></span></code></pre></div>
 <p>There are additional arguments you can use to restart R or to clear the environment. The <code>keep</code> argument takes a regular expression as the pattern match. To get an exact match, use the <code><a href="https://rdrr.io/r/base/Arithmetic.html">^</a></code> and <code><a href="https://rdrr.io/r/base/Extract.html">$</a></code> to signify the beginning and end (ex. <code>^your_text$</code>). To list objects, separate them with a <code><a href="https://rdrr.io/r/base/Logic.html">|</a></code>. as shown below.</p>
 <div class="sourceCode" id="cb8"><pre class="r"><span class="fu"><a href="reference/load_reactive_objects.html">load_reactive_objects</a></span>(
   <span class="no">...</span>,

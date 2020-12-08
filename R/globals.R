@@ -1,3 +1,3 @@
 utils::globalVariables(
-  c(".data", ".")
+  c(".data", ".", "!<-")
 )

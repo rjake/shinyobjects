@@ -1,8 +1,8 @@
-pandoc: 2.7.2
+pandoc: 2.7.3
 pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   how-it-works: how-it-works.html
   tips-and-tricks: tips-and-tricks.html
-last_built: 2020-10-29T02:05Z
+last_built: 2020-12-07T03:37Z
 

@@ -1,4 +1,4 @@
-library(mockery)
+suppressWarnings(library(mockery))
 
 e <- new.env()
 
@@ -11,16 +11,16 @@ items <-
 
 
 test_that("remove_objects() keeps objects", {
-
+  
   stub(remove_objects, "menu", 1)
-
+  
   # only keep items starting with "df"
   remove_objects(keep = "^df", envir = list2env(items, e))
   expect_equal(
     object = ls(e),
     expected = c("df", "df2")
   )
-
+  
   # confirm output lists items being removed
   x <-
     capture_message(
@@ -29,7 +29,7 @@ test_that("remove_objects() keeps objects", {
         envir = list2env(items, envir = e)
       )
     )
-
+  
   expect_true(grepl("these items will be removed.*- x", x))
   # then drop everything
   list2env(items, envir = e)
@@ -46,7 +46,7 @@ test_that("remove_objects() keeps objects", {
 
 test_that("messages when remove_objects() is canceled", {
   stub(remove_objects, "menu", 2)
-
+  
   keep_none <- remove_objects(envir = list2env(items, envir = e))
   expect_true(grepl("Please specify", keep_none))
   

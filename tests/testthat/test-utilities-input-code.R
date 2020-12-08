@@ -1,5 +1,37 @@
-context("prompts")
+# input_usage()----
+test_that("R files look for dummy_input list", {
+  code <- "x <- input$a;"
+  expected <- 
+    tibble::tibble(
+      input_name = "a",
+      times_used = 1L,
+      lines = glue::glue("1")
+    )
+  
+  tmp <- tempfile("data")
+  write(code, tmp)
+  actual <- input_usage(file = tmp)
+  unlink(tmp)
+  
+  expect_equal(actual, expected)
+})
 
+
+# find_input_code() ----
+test_that("R files look for dummy_input list", {
+  code <- "dummy_input <- list(x = 1); y = 2;"
+  expected <- "input <- list(x = 1)"
+  
+  tmp <- tempfile("data", fileext = ".R")
+  write(code, tmp)
+  actual <- find_input_code(file = tmp)
+  unlink(tmp)
+  
+  expect_equal(actual, expected)
+})
+
+
+# validate_inputs()----
 test_that("prompt to add dummy input list", {
   x_rmd <- 
     capture_messages(

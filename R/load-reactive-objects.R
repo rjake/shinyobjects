@@ -13,6 +13,7 @@
 #' @export
 #' @importFrom readr read_lines
 #' @importFrom rstudioapi restartSession
+#' @importFrom rlang parse_exprs
 #'
 #' @examples
 #' if (interactive()) {
@@ -82,7 +83,7 @@ load_reactive_objects <- function(file,
     
     # create ouput & session lists so assignments don't break
     if (nchar(inputs) > 0) {
-      eval_code(parse(text = inputs), envir = envir)  
+      eval_code(parse_exprs(inputs)[[1]], envir = envir)  
     }
     
     assign("output", list(), envir)
@@ -90,7 +91,7 @@ load_reactive_objects <- function(file,
     
     # final evaluation
     for (i in seq_along(final_code)) {
-      eval_code(final_code[i], envir = envir)
+      eval_code(final_code[[i]], envir = envir)
     }
   }
 }

@@ -1,5 +1,5 @@
-library(shiny)
-library(mockery)
+suppressWarnings(library(mockery))
+suppressWarnings(library(shiny))
 
 test_that("message if not shiny.tag", {
   run_app_mock <- mock()

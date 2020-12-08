@@ -1,5 +1,19 @@
-library(shiny)
+suppressWarnings(library(rlang))
+suppressWarnings(library(shiny))
 
+# eval_code() ----
+test_that("eval_code() works", {
+  x <- eval_code(expr(1 + 1))
+  
+  expect_equal(x, 2)
+  
+  expect_message(eval_code(expr(stop())), "there was an error")
+  expect_message(eval_code(expr(warning())), "there was a warning")
+})
+
+
+
+# confirm_function() ----
 test_that("confirm_function works", {
   code <-
     rlang::parse_exprs(
@@ -31,3 +45,8 @@ test_that("confirm_function works", {
   # for (expr in code) eval(expr, e)
   #confirm_function(code[[4]][[3]][[1]], shiny::reactive)
 })
+
+
+
+# full_argument_names() ----
+
