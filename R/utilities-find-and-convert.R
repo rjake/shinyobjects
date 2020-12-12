@@ -24,10 +24,11 @@ find_all_assignments_r <- function(x) {
 #' @description A data frame of all assignments and libraries
 #' @importFrom knitr purl
 #' @importFrom stringr str_detect
+#' @importFrom rlang parse_exprs
 #' @noRd
 find_all_assignments_rmd <- function(file) {
   tmp <- purl(file, output = tempfile(), quiet = TRUE)
-  x <- parse(tmp)
+  x <- parse_exprs(file(tmp))
   find_all_assignments_r(x)
 }
 
