@@ -47,6 +47,9 @@ find_all_assignments_rmd <- function(file) {
 #'  x = expr(y <- eventReactive(input$button, {print(input$n)}))
 #' )
 #' update_expressions(
+#'  x = expr(y <- reactive(withProgress(print(input$n))))
+#' )
+#' update_expressions(
 #'  x = expr(output$plot <- renderPlot(plot(1, 1)))
 #' )
 #' update_expressions(
