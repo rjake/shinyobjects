@@ -56,6 +56,46 @@ test_that("updates reactiveValues to list", {
 })
 
 
+test_that("updates withProgress", {
+  code <- expr(y <- reactive({
+      req(TRUE)
+      withProgress(print(123))
+    })
+  )
+  
+  new_code <- update_expressions(code)
+  
+  expect_true(code != new_code)
+  expect_equal(
+    paste(trimws(deparse(new_code)), collapse = ""),
+    "y <- function() {{req(TRUE)print(123)}}"
+  )
+})
+
+
+test_that("updates reactiveValuesToList to list", {
+  # options(shiny.suppressMissingContextError = TRUE)
+  code <- expr(y <- reactiveValuesToList(list(a = 123)))
+  new_code <- update_expressions(code)
+  expect_equal(
+    object = deparse(new_code),
+    expected = "y <- as.list(list(a = 123))"
+  )
+})
+
+
+
+test_that("updates reactiveVal modifies in place", {
+  # is updated
+  code <- expr(y <- reactiveVal())
+  new_code <- update_expressions(code)
+  expect_true(code != new_code)
+  # modifie in place
+  test_val <- eval(new_code)
+  test_val(10)
+  expect_equal(test_val(), 10)
+})
+
 
 test_that("updates reactive to function", {
   code <- expr(y <- reactive({print(input$n)}))
@@ -111,9 +151,6 @@ test_that("assignments can be = or <-", {
     x[c(2,4)]
   )
 })
-
-
-
 
 
 test_that("find input code", {
