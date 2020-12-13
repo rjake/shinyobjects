@@ -56,6 +56,14 @@ update_expressions <- function(x){
   #char_code <- as.character(as.expression(x))
   # code_as_call <- as.call(x)
   
+  # withProgress(...) -> (...)
+  # not usually assigned
+  if (confirm_function(x[[1]], shiny::withProgress)) {
+    new_expr <- expr(!!call_standardise(x)[["expr"]])
+    
+    return(new_expr)
+  }
+  
   # if not assigned (ex: library(...))
   if (
     x[[1]] != as.symbol("<-") & 
