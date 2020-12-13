@@ -53,8 +53,6 @@ find_all_assignments_rmd <- function(file) {
 #'  x = expr(output$plot <- shiny::renderPlot(plot(1, 1)))
 #' )
 update_expressions <- function(x){
-  #char_code <- as.character(as.expression(x))
-  # code_as_call <- as.call(x)
   
   # withProgress(...) -> (...) ----
   # not usually assigned
