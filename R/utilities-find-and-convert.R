@@ -56,15 +56,6 @@ find_all_assignments_rmd <- function(file) {
 #'  x = expr(output$plot <- shiny::renderPlot(plot(1, 1)))
 #' )
 update_expressions <- function(x){
-  
-  # withProgress(...) -> (...) ----
-  # not usually assigned
-  if (confirm_function(x[[1]], shiny::withProgress)) {
-    new_expr <- expr(!!call_standardise(x)[["expr"]])
-    
-    return(new_expr)
-  }
-  
   # exceptions ----
   # if not assigned (ex: library(...))
   if (
@@ -92,6 +83,23 @@ update_expressions <- function(x){
     get_formals  <- get_identity[[2]]
   }
 
+  # withProgress(...) -> (...) ----
+  # not usually assigned
+  if (any(grepl("withProgress", as.character(x)))) {
+    # check that item is not a symbol
+    sub_fns <- lapply(get_formals[-1], function(x) x[[1]])
+    has_with_progress <- lapply(sub_fns, confirm_function, shiny::withProgress)
+    
+    if (any(has_with_progress == TRUE)) {
+      # update guts
+      x_index <- which(has_with_progress == TRUE)[[1]] + 1
+      of_interest <- x[[3]][[2]][[x_index]]
+      x[[3]][[2]][[x_index]]  <- expr(!!call_standardise(of_interest)[["expr"]])
+      # update parts
+      get_formals <- x[[3]][[2]]
+    }
+  }
+  
   # reactive(...) -> function() {...} ----
   if (confirm_function(get_fn, shiny::reactive)) {
     new_expr <- expr(!!get_symbol <- function() { 
