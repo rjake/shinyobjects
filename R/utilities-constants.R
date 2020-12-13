@@ -7,3 +7,8 @@ strings_to_find <- function() {
     "(\\s)?(<-|=[^=]))"
   )
 }
+
+#' list to hold values for reactiveVal objects
+#' modifies in place
+#' @noRd
+.shinyobjects_reactiveVal <- list()
