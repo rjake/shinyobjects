@@ -66,7 +66,7 @@ update_expressions <- function(x){
   }
   
   # if no function involved
-  if (length(x[[3]]) == 1) {
+  if (!is.language(x[[3]])) {
     return(x)
   }
   
@@ -74,8 +74,14 @@ update_expressions <- function(x){
   get_symbol   <- x[[2]]
   get_identity <- x[[3]]
   get_fn       <- get_identity[[1]]
-  get_formals  <- get_identity[[2]]
-  
+   
+  # if assignment != symbol/function return [[1]] else [[2]]
+  if (length(get_identity) == 1) {
+    get_formals  <- get_identity[[1]]      
+  } else {
+    get_formals  <- get_identity[[2]]
+  }
+
   # reactive(...) -> function() {...}
   if (confirm_function(get_fn, shiny::reactive)) {
     new_expr <- expr(!!get_symbol <- function() { 
@@ -97,6 +103,28 @@ update_expressions <- function(x){
   # reactiveValues(...) -> list(...)
   if (confirm_function(get_fn, shiny::reactiveValues)) {
     x[[3]][[1]] <- as.symbol("list")
+    return(x)
+  }
+  
+  # reactiveVal(...) -> list(...)
+  if (confirm_function(get_fn, shiny::reactiveVal)) {
+    use_symbol <- as.character(get_symbol)
+    new_expr <-
+      expr(
+        !!get_symbol <- function(value, label = "") {
+          if (!missing(value)) {
+            .shinyobjects_reactiveVal[[!!use_symbol]] <<- value
+          } else {
+            .shinyobjects_reactiveVal[[!!use_symbol]]
+          }
+        }
+      )
+    return(new_expr)
+  }
+  
+  # reactiveValuesToList(...) -> list(...)
+  if (confirm_function(get_fn, shiny::reactiveValuesToList)) {
+    x[[3]][[1]] <- as.symbol("as.list")
     return(x)
   }
 
