@@ -56,7 +56,7 @@ update_expressions <- function(x){
   #char_code <- as.character(as.expression(x))
   # code_as_call <- as.call(x)
   
-  # withProgress(...) -> (...)
+  # withProgress(...) -> (...) ----
   # not usually assigned
   if (confirm_function(x[[1]], shiny::withProgress)) {
     new_expr <- expr(!!call_standardise(x)[["expr"]])
@@ -64,6 +64,7 @@ update_expressions <- function(x){
     return(new_expr)
   }
   
+  # exceptions ----
   # if not assigned (ex: library(...))
   if (
     x[[1]] != as.symbol("<-") & 
@@ -78,7 +79,7 @@ update_expressions <- function(x){
     return(x)
   }
   
-  # otherwise rearrange
+  # extract parts ----
   get_symbol   <- x[[2]]
   get_identity <- x[[3]]
   get_fn       <- get_identity[[1]]
@@ -90,7 +91,7 @@ update_expressions <- function(x){
     get_formals  <- get_identity[[2]]
   }
 
-  # reactive(...) -> function() {...}
+  # reactive(...) -> function() {...} ----
   if (confirm_function(get_fn, shiny::reactive)) {
     new_expr <- expr(!!get_symbol <- function() { 
       !!get_formals 
@@ -99,7 +100,7 @@ update_expressions <- function(x){
     return(new_expr)
   }
   
-  # eventReactive(...) -> function() {...}
+  # eventReactive(...) -> function() {...} ----
   if (confirm_function(get_fn, shiny::eventReactive)) {
     new_expr <- expr(!!get_symbol <- function() {
       !!call_standardise(get_identity)[["valueExpr"]]
@@ -108,13 +109,13 @@ update_expressions <- function(x){
     return(new_expr)
   }
   
-  # reactiveValues(...) -> list(...)
+  # reactiveValues(...) -> list(...) ----
   if (confirm_function(get_fn, shiny::reactiveValues)) {
     x[[3]][[1]] <- as.symbol("list")
     return(x)
   }
   
-  # reactiveVal(...) -> list(...)
+  # reactiveVal(...) -> list(...) ----
   if (confirm_function(get_fn, shiny::reactiveVal)) {
     use_symbol <- as.character(get_symbol)
     new_expr <-
@@ -130,23 +131,23 @@ update_expressions <- function(x){
     return(new_expr)
   }
   
-  # reactiveValuesToList(...) -> list(...)
+  # reactiveValuesToList(...) -> list(...) ----
   if (confirm_function(get_fn, shiny::reactiveValuesToList)) {
     x[[3]][[1]] <- as.symbol("as.list")
     return(x)
   }
 
-  # if not an x$y or x[[y]] object
+  # if not an x$y or x[[y]] object ----
   if (length(get_symbol) == 1) {
     return(x)
   }
   
-  # if not output$x
+  # if not output$x ----
   if (get_symbol[[2]] != as.symbol("output")) {
     return(x)
   }
   
-  # renderPlot(...) -> recordPlot(...)
+  # renderPlot(...) -> recordPlot(...) ----
   if (confirm_function(get_fn, shiny::renderPlot)) {
       new_exp <- expr(!!get_symbol <- grDevices::recordPlot(!!get_formals))
       
