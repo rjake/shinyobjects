@@ -85,6 +85,7 @@ update_expressions <- function(x){
     return(new_expr)
   }
   
+  # nocov start
   # eventReactive(...) -> function() {...}
   if (confirm_function(get_fn, shiny::eventReactive)) {
     new_expr <- expr(!!get_symbol <- function() {
@@ -117,6 +118,7 @@ update_expressions <- function(x){
       return(new_exp)
   } 
   
+  #nocov end
   new_exp <- expr(!!get_symbol <- !!get_formals)
   
   return(new_exp)
