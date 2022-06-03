@@ -58,6 +58,8 @@ test_that("updates reactiveValues to list", {
 
 
 test_that("updates reactive to function", {
+  testthat::skip_if_not(interactive())
+  
   code <- expr(y <- reactive({print(input$n)}))
   new_code <- update_expressions(code)
   actual <- paste(trimws(deparse(new_code)), collapse = "")
@@ -70,6 +72,8 @@ test_that("updates reactive to function", {
 
 
 test_that("updates eventReactive to function", {
+  testthat::skip_if_not(interactive())
+  
   code <- expr(y <- eventReactive(input$button, {print(input$n)}))
   new_code <- update_expressions(code)
   actual <- paste(trimws(deparse(new_code)), collapse = "")
